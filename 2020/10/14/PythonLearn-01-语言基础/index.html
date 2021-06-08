@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="python基本语法 一、变量和参数传递1.在Python中对一个变量赋值，其实只是创建了一个指向等号右侧对像的引用 1234a &#x3D; [1,2,3]b &#x3D; ab.append(4)a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PythonLearn-01-语言基础">
+<meta property="og:url" content="http://rainingapple.cn/2020/10/14/PythonLearn-01-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="rainingappleMK">
+<meta property="og:description" content="python基本语法 一、变量和参数传递1.在Python中对一个变量赋值，其实只是创建了一个指向等号右侧对像的引用 1234a &#x3D; [1,2,3]b &#x3D; ab.append(4)a">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-14T12:38:44.000Z">
+<meta property="article:modified_time" content="2020-10-18T09:11:26.317Z">
+<meta property="article:author" content="rainingapple">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rainingapple.cn/2020/10/14/PythonLearn-01-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>PythonLearn-01-语言基础 | rainingappleMK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/rainingapple" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">rainingappleMK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2020/10/14/PythonLearn-01-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PythonLearn-01-语言基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-14 20:38:44" itemprop="dateCreated datePublished" datetime="2020-10-14T20:38:44+08:00">2020-10-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-18 17:11:26" itemprop="dateModified" datetime="2020-10-18T17:11:26+08:00">2020-10-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>python基本语法</p>
+<h2 id="一、变量和参数传递"><a href="#一、变量和参数传递" class="headerlink" title="一、变量和参数传递"></a>一、变量和参数传递</h2><p>1.在Python中对一个变量赋值，其实只是创建了一个指向等号右侧对像的引用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = a</span><br><span class="line">b.append(<span class="number">4</span>)</span><br><span class="line">a</span><br></pre></td></tr></table></figure>
+
+<a id="more"></a>
+
+
+<pre><code>[1, 2, 3, 4]</code></pre>
+<p>2.对象作为参数传参，指向原始对象的新的本地变量就会被创建而不需复制，也就是引用传参类似的效果</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fuc1</span>(<span class="params">list1,element</span>):</span></span><br><span class="line">    list1.append(element)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">fuc1(data,<span class="number">4</span>)</span><br><span class="line">data</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>[1, 2, 3, 4]</code></pre>
+<h3 id="isinstance（var，type）和isinstance（var，（type1，type2，……））可以测试是否属于对应类型"><a href="#isinstance（var，type）和isinstance（var，（type1，type2，……））可以测试是否属于对应类型" class="headerlink" title="isinstance（var，type）和isinstance（var，（type1，type2，……））可以测试是否属于对应类型"></a>isinstance（var，type）和isinstance（var，（type1，type2，……））可以测试是否属于对应类型</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isinstance(<span class="number">1</span>,int)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isinstance(<span class="number">2.5</span>,(float))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isinstance(<span class="number">2.5</span>,(int,float))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<h3 id="isiterable（）判定是否可迭代"><a href="#isiterable（）判定是否可迭代" class="headerlink" title="isiterable（）判定是否可迭代"></a>isiterable（）判定是否可迭代</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">isiterable</span>(<span class="params">obj</span>):</span></span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        iter(obj)</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span></span><br><span class="line">    <span class="keyword">except</span> TypeError:</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isiterable(<span class="string">&#x27;a string&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isiterable([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">isiterable(<span class="number">4</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>False</code></pre>
+<h2 id="二、属性、方法、以及“反射”"><a href="#二、属性、方法、以及“反射”" class="headerlink" title="二、属性、方法、以及“反射”"></a>二、属性、方法、以及“反射”</h2><p>1.var.&lt;敲击tab&gt;可以自动罗列属性与方法</p>
+<p>2.getattr（）可以以反射的机制获得对应的属性方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">a = <span class="string">&#x27;foo&#x27;</span></span><br><span class="line">getattr(a,<span class="string">&#x27;split&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&lt;function str.split(sep=None, maxsplit=-1)&gt;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(getattr(a,<span class="string">&#x27;split&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>builtin_function_or_method</code></pre>
+<h3 id="问题探讨：is-与"><a href="#问题探讨：is-与" class="headerlink" title="问题探讨：is 与 =="></a>问题探讨：is 与 ==</h3><h4 id="1-is是判断两个对象是不是同一个对象，即不仅内容一样，还必须是同一个对象"><a href="#1-is是判断两个对象是不是同一个对象，即不仅内容一样，还必须是同一个对象" class="headerlink" title="1.is是判断两个对象是不是同一个对象，即不仅内容一样，还必须是同一个对象"></a>1.is是判断两个对象是不是同一个对象，即不仅内容一样，还必须是同一个对象</h4><h4 id="2-仅仅判定内容是否一致"><a href="#2-仅仅判定内容是否一致" class="headerlink" title="2.==仅仅判定内容是否一致"></a>2.==仅仅判定内容是否一致</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">b = a</span><br><span class="line">c = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a <span class="keyword">is</span> b</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a == b</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a <span class="keyword">is</span> c</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>False</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a == c</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>True</code></pre>
+<h2 id="三、Python-编码格式：字节与Unicode"><a href="#三、Python-编码格式：字节与Unicode" class="headerlink" title="三、Python 编码格式：字节与Unicode"></a>三、Python 编码格式：字节与Unicode</h2><h3 id="在现代python中（3-0以后），Unicode取代ASCII成为字符串类型的一等类"><a href="#在现代python中（3-0以后），Unicode取代ASCII成为字符串类型的一等类" class="headerlink" title="在现代python中（3.0以后），Unicode取代ASCII成为字符串类型的一等类"></a>在现代python中（3.0以后），Unicode取代ASCII成为字符串类型的一等类</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val = <span class="string">&#x27;sssss&#x27;</span></span><br><span class="line">type(val)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>str</code></pre>
+<h3 id="前面加b来直接生成utf-8编码"><a href="#前面加b来直接生成utf-8编码" class="headerlink" title="前面加b来直接生成utf-8编码"></a>前面加b来直接生成utf-8编码</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val2 = <span class="string">b&quot;sssss&quot;</span></span><br><span class="line">val2</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>b&#39;sssss&#39;</code></pre>
+<h3 id="可以使用encode与decode进行对应的编码解码（并不仅限于utf-8与Unicode之间）"><a href="#可以使用encode与decode进行对应的编码解码（并不仅限于utf-8与Unicode之间）" class="headerlink" title="可以使用encode与decode进行对应的编码解码（并不仅限于utf-8与Unicode之间）"></a>可以使用encode与decode进行对应的编码解码（并不仅限于utf-8与Unicode之间）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val_trans = val.encode(<span class="string">&quot;utf-8&quot;</span>)</span><br><span class="line">val_trans</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>b&#39;sssss&#39;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val_ori = val_trans.decode(<span class="string">&quot;UTF-8&quot;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val_ori</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;sssss&#39;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">val3 = <span class="string">&#x27;马康&#x27;</span></span><br><span class="line">val4 = val3.encode(<span class="string">&#x27;utf8&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">val4</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>b&#39;\xe9\xa9\xac\xe5\xba\xb7&#39;</code></pre>
+<h2 id="四、日期与时间（datetime相关介绍）"><a href="#四、日期与时间（datetime相关介绍）" class="headerlink" title="四、日期与时间（datetime相关介绍）"></a>四、日期与时间（datetime相关介绍）</h2><h3 id="相应的属性-year、month、day、hour、minute、second"><a href="#相应的属性-year、month、day、hour、minute、second" class="headerlink" title="相应的属性 year、month、day、hour、minute、second"></a>相应的属性 year、month、day、hour、minute、second</h3><h3 id="相应的方法-date（）、time（）"><a href="#相应的方法-date（）、time（）" class="headerlink" title="相应的方法 date（）、time（）"></a>相应的方法 date（）、time（）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime,date,time</span><br><span class="line">dt = datetime(<span class="number">2011</span>,<span class="number">10</span>,<span class="number">29</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">21</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 10, 29, 20, 30, 21)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.year</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>2011</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.month</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>10</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.day</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>29</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.hour</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>20</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.minute</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>30</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.second</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>21</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.date()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.date(2011, 10, 29)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.time()</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.time(20, 30, 21)</code></pre>
+<h3 id="strftime（）：datetime转字符串"><a href="#strftime（）：datetime转字符串" class="headerlink" title="strftime（）：datetime转字符串"></a>strftime（）：datetime转字符串</h3><h3 id="strptime（）：字符串转datetime"><a href="#strptime（）：字符串转datetime" class="headerlink" title="strptime（）：字符串转datetime"></a>strptime（）：字符串转datetime</h3><h3 id="注意具体的字母代表的含义"><a href="#注意具体的字母代表的含义" class="headerlink" title="注意具体的字母代表的含义"></a>注意具体的字母代表的含义</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.strftime(<span class="string">&#x27;%m/%d/%Y %H:%M&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;10/29/2011 20:30&#39;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.strptime(<span class="string">&#x27;20110831&#x27;</span>,<span class="string">&#x27;%Y%m%d&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 8, 31, 0, 0)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">datetime.strptime(<span class="string">&#x27;20110831111111&#x27;</span>,<span class="string">&#x27;%Y%m%d%H%M%S&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 8, 31, 11, 11, 11)</code></pre>
+<h3 id="使用replace-更改部分值"><a href="#使用replace-更改部分值" class="headerlink" title="使用replace()更改部分值"></a>使用replace()更改部分值</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt.replace(minute=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 10, 29, 20, 0, 21)</code></pre>
+<h3 id="datetime对象相减会产生datedelta对象"><a href="#datetime对象相减会产生datedelta对象" class="headerlink" title="datetime对象相减会产生datedelta对象"></a>datetime对象相减会产生datedelta对象</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt2 = datetime(<span class="number">2011</span>,<span class="number">11</span>,<span class="number">15</span>,<span class="number">22</span>,<span class="number">30</span>)</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delta = dt2-dt</span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">delta</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.timedelta(days=17, seconds=7179)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">type(delta)</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.timedelta</code></pre>
+<h3 id="timedelta和datetime可以做运算"><a href="#timedelta和datetime可以做运算" class="headerlink" title="timedelta和datetime可以做运算"></a>timedelta和datetime可以做运算</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 10, 29, 20, 30, 21)</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dt+delta</span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>datetime.datetime(2011, 11, 15, 22, 30)</code></pre>
+<h2 id="五、补充"><a href="#五、补充" class="headerlink" title="五、补充"></a>五、补充</h2><h3 id="1、for循环特殊写法"><a href="#1、for循环特殊写法" class="headerlink" title="1、for循环特殊写法"></a>1、for循环特殊写法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i,j,k <span class="keyword">in</span> [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]:</span><br><span class="line">    print(i+j+k)</span><br></pre></td></tr></table></figure>
+
+<pre><code>6
+15
+24</code></pre>
+<p>类似于 for（int i=1,j=4,k=7;i&lt;=3,j&lt;=6,k&lt;=9;i++,j++,k++）</p>
+<h3 id="2、range（）函数，range（起始，结束，步进）"><a href="#2、range（）函数，range（起始，结束，步进）" class="headerlink" title="2、range（）函数，range（起始，结束，步进）"></a>2、range（）函数，range（起始，结束，步进）</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<pre><code>0
+1
+2
+3
+4
+5
+6
+7
+8
+9</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">11</span>,<span class="number">3</span>):</span><br><span class="line">    print(i)</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+4
+7
+10</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">some_list = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>]</span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(len(some_list)):</span><br><span class="line">    print(some_list[i])</span><br></pre></td></tr></table></figure>
+
+<pre><code>1
+2
+3
+4</code></pre>
+<h3 id="3、三元表达式"><a href="#3、三元表达式" class="headerlink" title="3、三元表达式"></a>3、三元表达式</h3><p>value = true-expr if condition else false-expr</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">5</span></span><br><span class="line"><span class="string">&#x27;x比0大&#x27;</span> <span class="keyword">if</span> x&gt;<span class="number">0</span> <span class="keyword">else</span> <span class="string">&#x27;x比0小&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;x比0大&#39;</code></pre>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = <span class="number">-1</span></span><br><span class="line"><span class="string">&#x27;x比0大&#x27;</span> <span class="keyword">if</span> x&gt;<span class="number">0</span> <span class="keyword">else</span> <span class="string">&#x27;x比0小&#x27;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<pre><code>&#39;x比0小&#39;</code></pre>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>rainingapple
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://rainingapple.cn/2020/10/14/PythonLearn-01-%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/" title="PythonLearn-01-语言基础">http://rainingapple.cn/2020/10/14/PythonLearn-01-语言基础/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/13/LeetCode-24-%E4%B8%A4%E4%B8%A4%E4%BA%A4%E6%8D%A2%E9%93%BE%E8%A1%A8%E4%B8%AD%E7%9A%84%E8%8A%82%E7%82%B9/" rel="prev" title="LeetCode-24-两两交换链表中的节点">
+      <i class="fa fa-chevron-left"></i> LeetCode-24-两两交换链表中的节点
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/18/PythonLearn-02-%E5%86%85%E5%BB%BA%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/" rel="next" title="PythonLearn-02-内建数据类型">
+      PythonLearn-02-内建数据类型 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E5%8F%98%E9%87%8F%E5%92%8C%E5%8F%82%E6%95%B0%E4%BC%A0%E9%80%92"><span class="nav-number">1.</span> <span class="nav-text">一、变量和参数传递</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#isinstance%EF%BC%88var%EF%BC%8Ctype%EF%BC%89%E5%92%8Cisinstance%EF%BC%88var%EF%BC%8C%EF%BC%88type1%EF%BC%8Ctype2%EF%BC%8C%E2%80%A6%E2%80%A6%EF%BC%89%EF%BC%89%E5%8F%AF%E4%BB%A5%E6%B5%8B%E8%AF%95%E6%98%AF%E5%90%A6%E5%B1%9E%E4%BA%8E%E5%AF%B9%E5%BA%94%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.1.</span> <span class="nav-text">isinstance（var，type）和isinstance（var，（type1，type2，……））可以测试是否属于对应类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isiterable%EF%BC%88%EF%BC%89%E5%88%A4%E5%AE%9A%E6%98%AF%E5%90%A6%E5%8F%AF%E8%BF%AD%E4%BB%A3"><span class="nav-number">1.2.</span> <span class="nav-text">isiterable（）判定是否可迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%B1%9E%E6%80%A7%E3%80%81%E6%96%B9%E6%B3%95%E3%80%81%E4%BB%A5%E5%8F%8A%E2%80%9C%E5%8F%8D%E5%B0%84%E2%80%9D"><span class="nav-number">2.</span> <span class="nav-text">二、属性、方法、以及“反射”</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%98%E6%8E%A2%E8%AE%A8%EF%BC%9Ais-%E4%B8%8E"><span class="nav-number">2.1.</span> <span class="nav-text">问题探讨：is 与 &#x3D;&#x3D;</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-is%E6%98%AF%E5%88%A4%E6%96%AD%E4%B8%A4%E4%B8%AA%E5%AF%B9%E8%B1%A1%E6%98%AF%E4%B8%8D%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1%EF%BC%8C%E5%8D%B3%E4%B8%8D%E4%BB%85%E5%86%85%E5%AE%B9%E4%B8%80%E6%A0%B7%EF%BC%8C%E8%BF%98%E5%BF%85%E9%A1%BB%E6%98%AF%E5%90%8C%E4%B8%80%E4%B8%AA%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.1.1.</span> <span class="nav-text">1.is是判断两个对象是不是同一个对象，即不仅内容一样，还必须是同一个对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BB%85%E4%BB%85%E5%88%A4%E5%AE%9A%E5%86%85%E5%AE%B9%E6%98%AF%E5%90%A6%E4%B8%80%E8%87%B4"><span class="nav-number">2.1.2.</span> <span class="nav-text">2.&#x3D;&#x3D;仅仅判定内容是否一致</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81Python-%E7%BC%96%E7%A0%81%E6%A0%BC%E5%BC%8F%EF%BC%9A%E5%AD%97%E8%8A%82%E4%B8%8EUnicode"><span class="nav-number">3.</span> <span class="nav-text">三、Python 编码格式：字节与Unicode</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8%E7%8E%B0%E4%BB%A3python%E4%B8%AD%EF%BC%883-0%E4%BB%A5%E5%90%8E%EF%BC%89%EF%BC%8CUnicode%E5%8F%96%E4%BB%A3ASCII%E6%88%90%E4%B8%BA%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%B1%BB%E5%9E%8B%E7%9A%84%E4%B8%80%E7%AD%89%E7%B1%BB"><span class="nav-number">3.1.</span> <span class="nav-text">在现代python中（3.0以后），Unicode取代ASCII成为字符串类型的一等类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E9%9D%A2%E5%8A%A0b%E6%9D%A5%E7%9B%B4%E6%8E%A5%E7%94%9F%E6%88%90utf-8%E7%BC%96%E7%A0%81"><span class="nav-number">3.2.</span> <span class="nav-text">前面加b来直接生成utf-8编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BB%A5%E4%BD%BF%E7%94%A8encode%E4%B8%8Edecode%E8%BF%9B%E8%A1%8C%E5%AF%B9%E5%BA%94%E7%9A%84%E7%BC%96%E7%A0%81%E8%A7%A3%E7%A0%81%EF%BC%88%E5%B9%B6%E4%B8%8D%E4%BB%85%E9%99%90%E4%BA%8Eutf-8%E4%B8%8EUnicode%E4%B9%8B%E9%97%B4%EF%BC%89"><span class="nav-number">3.3.</span> <span class="nav-text">可以使用encode与decode进行对应的编码解码（并不仅限于utf-8与Unicode之间）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E6%97%A5%E6%9C%9F%E4%B8%8E%E6%97%B6%E9%97%B4%EF%BC%88datetime%E7%9B%B8%E5%85%B3%E4%BB%8B%E7%BB%8D%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">四、日期与时间（datetime相关介绍）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%BA%94%E7%9A%84%E5%B1%9E%E6%80%A7-year%E3%80%81month%E3%80%81day%E3%80%81hour%E3%80%81minute%E3%80%81second"><span class="nav-number">4.1.</span> <span class="nav-text">相应的属性 year、month、day、hour、minute、second</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%BA%94%E7%9A%84%E6%96%B9%E6%B3%95-date%EF%BC%88%EF%BC%89%E3%80%81time%EF%BC%88%EF%BC%89"><span class="nav-number">4.2.</span> <span class="nav-text">相应的方法 date（）、time（）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strftime%EF%BC%88%EF%BC%89%EF%BC%9Adatetime%E8%BD%AC%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">4.3.</span> <span class="nav-text">strftime（）：datetime转字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#strptime%EF%BC%88%EF%BC%89%EF%BC%9A%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%ACdatetime"><span class="nav-number">4.4.</span> <span class="nav-text">strptime（）：字符串转datetime</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E5%85%B7%E4%BD%93%E7%9A%84%E5%AD%97%E6%AF%8D%E4%BB%A3%E8%A1%A8%E7%9A%84%E5%90%AB%E4%B9%89"><span class="nav-number">4.5.</span> <span class="nav-text">注意具体的字母代表的含义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8replace-%E6%9B%B4%E6%94%B9%E9%83%A8%E5%88%86%E5%80%BC"><span class="nav-number">4.6.</span> <span class="nav-text">使用replace()更改部分值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#datetime%E5%AF%B9%E8%B1%A1%E7%9B%B8%E5%87%8F%E4%BC%9A%E4%BA%A7%E7%94%9Fdatedelta%E5%AF%B9%E8%B1%A1"><span class="nav-number">4.7.</span> <span class="nav-text">datetime对象相减会产生datedelta对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#timedelta%E5%92%8Cdatetime%E5%8F%AF%E4%BB%A5%E5%81%9A%E8%BF%90%E7%AE%97"><span class="nav-number">4.8.</span> <span class="nav-text">timedelta和datetime可以做运算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%94%E3%80%81%E8%A1%A5%E5%85%85"><span class="nav-number">5.</span> <span class="nav-text">五、补充</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1%E3%80%81for%E5%BE%AA%E7%8E%AF%E7%89%B9%E6%AE%8A%E5%86%99%E6%B3%95"><span class="nav-number">5.1.</span> <span class="nav-text">1、for循环特殊写法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2%E3%80%81range%EF%BC%88%EF%BC%89%E5%87%BD%E6%95%B0%EF%BC%8Crange%EF%BC%88%E8%B5%B7%E5%A7%8B%EF%BC%8C%E7%BB%93%E6%9D%9F%EF%BC%8C%E6%AD%A5%E8%BF%9B%EF%BC%89"><span class="nav-number">5.2.</span> <span class="nav-text">2、range（）函数，range（起始，结束，步进）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3%E3%80%81%E4%B8%89%E5%85%83%E8%A1%A8%E8%BE%BE%E5%BC%8F"><span class="nav-number">5.3.</span> <span class="nav-text">3、三元表达式</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">rainingapple</p>
+  <div class="site-description" itemprop="description">划水也要划得自在</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainingapple</span>
+  <span>&nbsp;<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn"> 冀ICP备-2020030169号</a></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '92659aa3d0b96dcc89ba',
+      clientSecret: '0a7caa683d281a88960c565ce4e0dc38c8976a9c',
+      repo        : 'my_blog_comment',
+      owner       : 'rainingapple',
+      admin       : ['rainingapple'],
+      id          : '2cfc64746f6ebb0ebd10f9b2846d45b0',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var i=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){i&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,e,a=0;a<r.length;a++)t=r[a],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Java AnnotationAnnotations, a form of metadata, provide data about a program that is not part of the program itself. Annotations have no direct effect on the operation of the code they annotate. Annot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java Annotation">
+<meta property="og:url" content="http://rainingapple.cn/2021/03/25/Java-Annotation/index.html">
+<meta property="og:site_name" content="rainingappleMK">
+<meta property="og:description" content="Java AnnotationAnnotations, a form of metadata, provide data about a program that is not part of the program itself. Annotations have no direct effect on the operation of the code they annotate. Annot">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-25T01:06:18.000Z">
+<meta property="article:modified_time" content="2021-06-08T09:12:57.206Z">
+<meta property="article:author" content="rainingapple">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Annotation">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rainingapple.cn/2021/03/25/Java-Annotation/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Java Annotation | rainingappleMK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/rainingapple" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">rainingappleMK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/03/25/Java-Annotation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Java Annotation
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 09:06:18" itemprop="dateCreated datePublished" datetime="2021-03-25T09:06:18+08:00">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-08 17:12:57" itemprop="dateModified" datetime="2021-06-08T17:12:57+08:00">2021-06-08</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Annotation/" itemprop="url" rel="index"><span itemprop="name">Annotation</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="Java-Annotation"><a href="#Java-Annotation" class="headerlink" title="Java Annotation"></a>Java Annotation</h1><p><strong><em>Annotations</em></strong>, a form of <strong>metadata</strong>, provide data about a program that is <strong>not part of the program itself</strong>. Annotations have <strong>no direct effect</strong> on the operation of the code they annotate.</p>
+<p>Annotations have a number of uses, among them:</p>
+<ul>
+<li><strong>Information for the compiler</strong> — Annotations can be used by the compiler to <strong>detect errors</strong> or <strong>suppress warnings</strong>.</li>
+<li><strong>Compile-time and deployment-time processing</strong> — Software tools can process annotation information to <strong>generate code</strong>, <strong>XML files</strong>, and so forth.</li>
+<li><strong>Runtime processing</strong> — Some annotations are available to be examined at runtime.</li>
+</ul>
+<a id="more"></a>
+
+<h2 id="About-this-article"><a href="#About-this-article" class="headerlink" title="About this article"></a>About this article</h2><p>This article explains <strong>where annotations can be used</strong>, <strong>how to apply annotations</strong>, what predefined annotation types are available in the Java Platform, Standard Edition (Java SE API), how type annnotations can be used in <strong>conjunction with pluggable type systems</strong> to write code with stronger type checking, and how to <strong>implement repeating annotations</strong>.</p>
+<h2 id="Annotations-Basics"><a href="#Annotations-Basics" class="headerlink" title="Annotations Basics"></a>Annotations Basics</h2><h3 id="The-Format-of-an-Annotation"><a href="#The-Format-of-an-Annotation" class="headerlink" title="The Format of an Annotation"></a>The Format of an Annotation</h3><p>The at sign character (<code>@</code>) indicates to the compiler that what follows is an annotation. </p>
+<p>In the following example, the annotation’s name is <code>Override</code>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mySuperMethod</span><span class="params">()</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>The annotation can include <em>elements</em>, which <strong>can be named or unnamed</strong>, and there are values for those elements:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Author(</span></span><br><span class="line"><span class="meta">   name = &quot;Benjamin Franklin&quot;,</span></span><br><span class="line"><span class="meta">   date = &quot;3/27/2003&quot;</span></span><br><span class="line"><span class="meta">)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>() </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(value = &quot;unchecked&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>If there is just one element named <code>value</code>, then the name can be omitted, as in:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">myMethod</span><span class="params">()</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>If the annotation has no elements, then the parentheses(括号) can be omitted, as shown in  <code>@Override</code> example.</p>
+<p>It is also possible to use multiple annotations on the same declaration:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Author(name = &quot;Jane Doe&quot;)</span></span><br><span class="line"><span class="meta">@EBook</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>If the annotations have the same type, then this is called a <strong>repeating annotation</strong>:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Author(name = &quot;Jane Doe&quot;)</span></span><br><span class="line"><span class="meta">@Author(name = &quot;John Smith&quot;)</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span> </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Repeating annotations are supported as of the Java SE 8 release. </p>
+<p>The annotation type can be one of the types that are defined in the <code>java.lang</code> or <code>java.lang.annotation</code> packages of the Java SE API. In the previous examples, <code>Override</code> and <code>SuppressWarnings</code> are predefined Java annotations. It is also possible to define your own annotation type. The <code>Author</code> and <code>Ebook</code> annotations in the previous example are custom annotation types.</p>
+<h3 id="Where-Can-Be-Used"><a href="#Where-Can-Be-Used" class="headerlink" title="Where Can Be Used"></a>Where Can Be Used</h3><p>Annotations can be applied to declarations: declarations of classes, fields, methods, and other program elements. </p>
+<p>When used on a declaration, each annotation often appears, by convention, on its own line.</p>
+<p>As of the Java SE 8 release, annotations can also be applied to the <em>use</em> of types. Here are some examples:</p>
+<h4 id="Class-instance-creation-expression"><a href="#Class-instance-creation-expression" class="headerlink" title="Class instance creation expression"></a>Class instance creation expression</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="meta">@Interned</span> MyObject();</span><br></pre></td></tr></table></figure>
+
+<h4 id="Type-cast"><a href="#Type-cast" class="headerlink" title="Type cast"></a>Type cast</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">myString = (<span class="meta">@NonNull</span> String) str;</span><br></pre></td></tr></table></figure>
+
+<h4 id="implements-clause"><a href="#implements-clause" class="headerlink" title="implements clause"></a>implements clause</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">UnmodifiableList</span>&lt;<span class="title">T</span>&gt; <span class="keyword">implements</span></span></span><br><span class="line"><span class="class">   @<span class="title">Readonly</span> <span class="title">List</span>&lt;@<span class="title">Readonly</span> <span class="title">T</span>&gt; </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="Thrown-exception-declaration"><a href="#Thrown-exception-declaration" class="headerlink" title="Thrown exception declaration"></a>Thrown exception declaration</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">monitorTemperature</span><span class="params">()</span> <span class="keyword">throws</span></span></span><br><span class="line"><span class="function">   @Critical TemperatureException </span>&#123; ... &#125;</span><br></pre></td></tr></table></figure>
+
+<p>This form of annotation is called a <strong>type annotation</strong>. </p>
+<h2 id="Declaring-an-Annotation-Type"><a href="#Declaring-an-Annotation-Type" class="headerlink" title="Declaring an Annotation Type"></a>Declaring an Annotation Type</h2><p>Many annotations <strong>replace comments in code</strong>.</p>
+<p>Suppose that a software group traditionally starts the body of every class with comments providing important information:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Generation3List</span> <span class="keyword">extends</span> <span class="title">Generation2List</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Author: John Doe</span></span><br><span class="line">   <span class="comment">// Date: 3/17/2002</span></span><br><span class="line">   <span class="comment">// Current revision: 6</span></span><br><span class="line">   <span class="comment">// Last modified: 4/12/2004</span></span><br><span class="line">   <span class="comment">// By: Jane Doe</span></span><br><span class="line">   <span class="comment">// Reviewers: Alice, Bill, Cindy</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">// class code goes here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>To add this same metadata with an annotation, you must first define the <em>annotation type</em>. The syntax for doing this is:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@interface</span> ClassPreamble &#123;</span><br><span class="line">   <span class="function">String <span class="title">author</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function">String <span class="title">date</span><span class="params">()</span></span>;</span><br><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">currentRevision</span><span class="params">()</span> <span class="keyword">default</span> 1</span>;</span><br><span class="line">   <span class="function">String <span class="title">lastModified</span><span class="params">()</span> <span class="keyword">default</span> &quot;N/A&quot;</span>;</span><br><span class="line">   <span class="function">String <span class="title">lastModifiedBy</span><span class="params">()</span> <span class="keyword">default</span> &quot;N/A&quot;</span>;</span><br><span class="line">   <span class="comment">// Note use of array</span></span><br><span class="line">   String[] reviewers();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The annotation type definition looks similar to an interface definition where the keyword interface is preceded by the at sign (<code>@</code>) . <strong>Annotation types are a form of interface</strong>, which will be covered in a later lesson. </p>
+<p>The body of the previous annotation definition contains annotation <strong>type element declarations</strong>, which look a lot like methods. Note that they can define <strong>optional default values</strong>.</p>
+<p>After the annotation type is defined, you can use annotations of that type, with the values filled in, like this:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ClassPreamble</span> (</span><br><span class="line">   author = <span class="string">&quot;John Doe&quot;</span>,</span><br><span class="line">   date = <span class="string">&quot;3/17/2002&quot;</span>,</span><br><span class="line">   currentRevision = <span class="number">6</span>,</span><br><span class="line">   lastModified = <span class="string">&quot;4/12/2004&quot;</span>,</span><br><span class="line">   lastModifiedBy = <span class="string">&quot;Jane Doe&quot;</span>,</span><br><span class="line">   <span class="comment">// Note array notation</span></span><br><span class="line">   reviewers = &#123;<span class="string">&quot;Alice&quot;</span>, <span class="string">&quot;Bob&quot;</span>, <span class="string">&quot;Cindy&quot;</span>&#125;</span><br><span class="line">)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Generation3List</span> <span class="keyword">extends</span> <span class="title">Generation2List</span> </span>&#123;</span><br><span class="line"></span><br><span class="line"><span class="comment">// class code goes here</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>Note:</strong> To make the information in <code>@ClassPreamble</code> appear in <strong>Javadoc-generated</strong> documentation, you must annotate the <code>@ClassPreamble</code> definition with the <code>@Documented</code> annotation:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// import this to use @Documented</span></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Documented</span></span><br><span class="line"><span class="meta">@interface</span> ClassPreamble &#123;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// Annotation element definitions</span></span><br><span class="line">   </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Predefined-Annotation-Types"><a href="#Predefined-Annotation-Types" class="headerlink" title="Predefined Annotation Types"></a>Predefined Annotation Types</h2><p>A set of annotation types are predefined in the Java SE API. Some annotation types are used by the Java compiler, and some apply to other annotations.</p>
+<h3 id="Annotation-Types-Used-by-the-Java-Language"><a href="#Annotation-Types-Used-by-the-Java-Language" class="headerlink" title="Annotation Types Used by the Java Language"></a>Annotation Types Used by the Java Language</h3><p>The predefined annotation types defined in <code>java.lang</code> are <code>@Deprecated</code>, <code>@Override</code>, and <code>@SuppressWarnings</code>.</p>
+<p><strong>@Deprecated</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Deprecated.html"><code>@Deprecated</code></a> annotation indicates that the marked element is <em>deprecated</em> and should no longer be used. The compiler generates a warning whenever a program uses a method, class, or field with the <code>@Deprecated</code> annotation. When an element is deprecated, it should also be documented using the Javadoc <code>@deprecated</code> tag, as shown in the following example. The use of the at sign (<code>@</code>) in both Javadoc comments and in annotations is not coincidental: they are related conceptually. Also, note that <strong>the Javadoc tag starts with a lowercase <em>d</em> and the annotation starts with an uppercase <em>D</em></strong>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">// Javadoc comment follows</span></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@deprecated</span></span></span><br><span class="line"><span class="comment">     * explanation of why it was deprecated</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@Deprecated</span></span><br><span class="line">    <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">deprecatedMethod</span><span class="params">()</span> </span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>@Override</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/Override.html"><code>@Override</code></a> annotation informs the compiler that the element is meant to override an element declared in a superclass. Overriding methods will be discussed in <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/IandI/index.html">Interfaces and Inheritance</a>.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mark method as a superclass method</span></span><br><span class="line"><span class="comment">// that has been overridden</span></span><br><span class="line"><span class="meta">@Override</span> </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">overriddenMethod</span><span class="params">()</span> </span>&#123; &#125;</span><br></pre></td></tr></table></figure>
+
+<p>While it is <strong>not required</strong> to use this annotation when overriding a method, it <strong>helps to prevent errors</strong>. If a method marked with <code>@Override</code> fails to correctly override a method in one of its superclasses, the compiler generates an error.</p>
+<p><strong>@SuppressWarnings</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/SuppressWarnings.html"><code>@SuppressWarnings</code></a> annotation tells the compiler to <strong>suppress specific warnings</strong> that it would otherwise generate. In the following example, a deprecated method is used, and the compiler usually generates a warning. In this case, however, the annotation causes the warning to be suppressed.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// use a deprecated method and tell </span></span><br><span class="line"><span class="comment">// compiler not to generate a warning</span></span><br><span class="line"><span class="meta">@SuppressWarnings(&quot;deprecation&quot;)</span></span><br><span class="line"> <span class="function"><span class="keyword">void</span> <span class="title">useDeprecatedMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">     <span class="comment">// deprecation warning</span></span><br><span class="line">     <span class="comment">// - suppressed</span></span><br><span class="line">     objectOne.deprecatedMethod();</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>Every compiler warning belongs to a category. The Java Language Specification lists two categories: <code>deprecation</code> and <code>unchecked</code>. The <code>unchecked</code> warning can occur when interfacing with legacy code written before the advent of <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/generics/index.html">generics</a>. To suppress multiple categories of warnings, use the following syntax:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@SuppressWarnings(&#123;&quot;unchecked&quot;, &quot;deprecation&quot;&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>@SafeVarargs</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/SafeVarargs.html"><code>@SafeVarargs</code></a> annotation, when applied to a method or constructor, <strong>asserts that the code does not perform potentially unsafe operations on its <code>varargs</code> parameter</strong>. When this annotation type is used, unchecked warnings relating to <code>varargs</code> usage are suppressed.</p>
+<p><strong>@FunctionalInterface</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/FunctionalInterface.html"><code>@FunctionalInterface</code></a> annotation, introduced in Java SE 8, indicates that the type declaration is intended to be a functional interface, as defined by the Java Language Specification.</p>
+<h3 id="Annotations-That-Apply-to-Other-Annotations"><a href="#Annotations-That-Apply-to-Other-Annotations" class="headerlink" title="Annotations That Apply to Other Annotations"></a>Annotations That Apply to Other Annotations</h3><p>Annotations that apply to other annotations are called <em>meta-annotations</em>. There are several meta-annotation types defined in <code>java.lang.annotation</code>.</p>
+<p><strong>@Retention</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Retention.html"><code>@Retention</code></a> annotation specifies how the marked annotation is stored:</p>
+<ul>
+<li><code>RetentionPolicy.SOURCE</code> – The marked annotation is retained only in the <strong>source level</strong> and is ignored by the compiler.</li>
+<li><code>RetentionPolicy.CLASS</code> – The marked annotation is retained by the compiler at <strong>compile time</strong>, but is ignored by the Java Virtual Machine (JVM).</li>
+<li><code>RetentionPolicy.RUNTIME</code> – The marked annotation is retained by the JVM so it can be used by the <strong>runtime environment</strong>.</li>
+</ul>
+<p><strong>@Documented</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Documented.html"><code>@Documented</code></a> annotation indicates that whenever the specified annotation is used those elements should be documented using the Javadoc tool. (By default, annotations are not included in Javadoc.) For more information, see the <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/technotes/guides/javadoc/index.html">Javadoc tools page</a>.</p>
+<p><strong>@Target</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Target.html"><code>@Target</code></a> annotation marks another annotation to restrict what kind of Java elements the annotation can be applied to. A target annotation specifies one of the following element types as its value:</p>
+<ul>
+<li><code>ElementType.ANNOTATION_TYPE</code> can be applied to an annotation type.</li>
+<li><code>ElementType.CONSTRUCTOR</code> can be applied to a constructor.</li>
+<li><code>ElementType.FIELD</code> can be applied to a field or property.</li>
+<li><code>ElementType.LOCAL_VARIABLE</code> can be applied to a local variable.</li>
+<li><code>ElementType.METHOD</code> can be applied to a method-level annotation.</li>
+<li><code>ElementType.PACKAGE</code> can be applied to a package declaration.</li>
+<li><code>ElementType.PARAMETER</code> can be applied to the parameters of a method.</li>
+<li><code>ElementType.TYPE</code> can be applied to any element of a class.</li>
+</ul>
+<p><strong>@Inherited</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Inherited.html"><code>@Inherited</code></a> annotation indicates that the annotation type can be inherited from the super class. (This is not true by default.) When the user queries the annotation type and the class has no annotation for this type, the class’ superclass is queried for the annotation type. This annotation applies only to class declarations.</p>
+<p><strong>@Repeatable</strong> <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/java/lang/annotation/Repeatable.html"><code>@Repeatable</code></a> annotation, introduced in Java SE 8, indicates that the marked annotation can be applied more than once to the same declaration or type use. For more information, see <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html">Repeating Annotations</a>.</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>Javase tutorial annotations：</p>
+<p><a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/index.html">https://docs.oracle.com/javase/tutorial/java/annotations/index.html</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>rainingapple
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://rainingapple.cn/2021/03/25/Java-Annotation/" title="Java Annotation">http://rainingapple.cn/2021/03/25/Java-Annotation/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Annotation/" rel="tag"># Annotation</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/23/SpringBoot-05-Data/" rel="prev" title="SpringBoot-05-Data">
+      <i class="fa fa-chevron-left"></i> SpringBoot-05-Data
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Java-Annotation"><span class="nav-number">1.</span> <span class="nav-text">Java Annotation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#About-this-article"><span class="nav-number">1.1.</span> <span class="nav-text">About this article</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Annotations-Basics"><span class="nav-number">1.2.</span> <span class="nav-text">Annotations Basics</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#The-Format-of-an-Annotation"><span class="nav-number">1.2.1.</span> <span class="nav-text">The Format of an Annotation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Where-Can-Be-Used"><span class="nav-number">1.2.2.</span> <span class="nav-text">Where Can Be Used</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Class-instance-creation-expression"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">Class instance creation expression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Type-cast"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">Type cast</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#implements-clause"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">implements clause</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Thrown-exception-declaration"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">Thrown exception declaration</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Declaring-an-Annotation-Type"><span class="nav-number">1.3.</span> <span class="nav-text">Declaring an Annotation Type</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Predefined-Annotation-Types"><span class="nav-number">1.4.</span> <span class="nav-text">Predefined Annotation Types</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Annotation-Types-Used-by-the-Java-Language"><span class="nav-number">1.4.1.</span> <span class="nav-text">Annotation Types Used by the Java Language</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Annotations-That-Apply-to-Other-Annotations"><span class="nav-number">1.4.2.</span> <span class="nav-text">Annotations That Apply to Other Annotations</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">1.5.</span> <span class="nav-text">参考</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">rainingapple</p>
+  <div class="site-description" itemprop="description">划水也要划得自在</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainingapple</span>
+  <span>&nbsp;<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn"> 冀ICP备-2020030169号</a></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '92659aa3d0b96dcc89ba',
+      clientSecret: '0a7caa683d281a88960c565ce4e0dc38c8976a9c',
+      repo        : 'my_blog_comment',
+      owner       : 'rainingapple',
+      admin       : ['rainingapple'],
+      id          : '5f741733552cf0b5a0490b5a4a722fe6',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var i=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){i&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,e,a=0;a<r.length;a++)t=r[a],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

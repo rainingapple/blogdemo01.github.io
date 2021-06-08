@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="SpringMVC-04-Model_and_MessyCode MVC中我们需要解决请求行的参数解析问题，具体的我们需要规定参数的名称、是否必须、以及必要的出错处理 MVC中我们需要使用怎样的格式进行数据回传，Model、ModelAndView、ModelMap有何区别 MVC依旧逃避不了web经常遇见的乱码问题，所幸MVC提供了比原生WEB更好的解决方式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SpringMVC-04-Model_and_MessyCode">
+<meta property="og:url" content="http://rainingapple.cn/2021/02/06/SpringMVC-04-Model-and-MessyCode/index.html">
+<meta property="og:site_name" content="rainingappleMK">
+<meta property="og:description" content="SpringMVC-04-Model_and_MessyCode MVC中我们需要解决请求行的参数解析问题，具体的我们需要规定参数的名称、是否必须、以及必要的出错处理 MVC中我们需要使用怎样的格式进行数据回传，Model、ModelAndView、ModelMap有何区别 MVC依旧逃避不了web经常遇见的乱码问题，所幸MVC提供了比原生WEB更好的解决方式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-02-06T09:03:32.000Z">
+<meta property="article:modified_time" content="2021-02-10T01:56:04.961Z">
+<meta property="article:author" content="rainingapple">
+<meta property="article:tag" content="Java">
+<meta property="article:tag" content="Spring">
+<meta property="article:tag" content="SpringMVC">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rainingapple.cn/2021/02/06/SpringMVC-04-Model-and-MessyCode/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>SpringMVC-04-Model_and_MessyCode | rainingappleMK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/rainingapple" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">rainingappleMK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/06/SpringMVC-04-Model-and-MessyCode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SpringMVC-04-Model_and_MessyCode
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-02-06 17:03:32" itemprop="dateCreated datePublished" datetime="2021-02-06T17:03:32+08:00">2021-02-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-10 09:56:04" itemprop="dateModified" datetime="2021-02-10T09:56:04+08:00">2021-02-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringMVC/" itemprop="url" rel="index"><span itemprop="name">SpringMVC</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="SpringMVC-04-Model-and-MessyCode"><a href="#SpringMVC-04-Model-and-MessyCode" class="headerlink" title="SpringMVC-04-Model_and_MessyCode"></a>SpringMVC-04-Model_and_MessyCode</h1><ul>
+<li>MVC中我们需要解决请求行的<strong>参数解析</strong>问题，具体的我们需要规定参数的名称、是否必须、以及必要的出错处理</li>
+<li>MVC中我们需要使用怎样的格式进行<strong>数据回传</strong>，Model、ModelAndView、ModelMap有何区别</li>
+<li>MVC依旧逃避不了web经常遇见的<strong>乱码</strong>问题，所幸MVC提供了比原生WEB更好的解决方式</li>
+</ul>
+<a id="more"></a>
+
+<p><strong>参考</strong></p>
+<p>spring-webmvc官方文档</p>
+<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/5.2.12.RELEASE/spring-framework-reference/web.html#spring-web">https://docs.spring.io/spring-framework/docs/5.2.12.RELEASE/spring-framework-reference/web.html#spring-web</a></p>
+<p>狂神说博客</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33369905/article/details/105828924">https://blog.csdn.net/qq_33369905/article/details/105828924</a></p>
+<p><strong>Github仓库</strong></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/rainingapple/Spring_Learn">https://github.com/rainingapple/Spring_Learn</a></p>
+<h2 id="请求行数据处理"><a href="#请求行数据处理" class="headerlink" title="请求行数据处理"></a>请求行数据处理</h2><h3 id="提交的域名称和处理方法的参数名一致"><a href="#提交的域名称和处理方法的参数名一致" class="headerlink" title="提交的域名称和处理方法的参数名一致"></a>提交的域名称和处理方法的参数名一致</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test1&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test1</span><span class="params">(String name)</span></span>&#123;</span><br><span class="line">    System.out.println(name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当我们传递name参数，对应传递成功并打印name。如果不传参或者传递错误的名字，返回null</p>
+<h3 id="RequestParam"><a href="#RequestParam" class="headerlink" title="@RequestParam"></a>@RequestParam</h3><p>当我们需要特殊约束必须传递某个参数时，可以使用@RequestParam</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test2&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test2</span><span class="params">(<span class="meta">@RequestParam(&quot;username&quot;)</span> String username)</span></span>&#123;</span><br><span class="line">    System.out.println(username);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>username必须传递，否则报错</p>
+<h3 id="提交对象"><a href="#提交对象" class="headerlink" title="提交对象"></a>提交对象</h3><h4 id="对应构造实体类User"><a href="#对应构造实体类User" class="headerlink" title="对应构造实体类User"></a>对应构造实体类User</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> id;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> age;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>三个注解分别提供setget等方法、无参构造、有参构造</p>
+<h4 id="使用注解应引入lombok依赖"><a href="#使用注解应引入lombok依赖" class="headerlink" title="使用注解应引入lombok依赖"></a>使用注解应引入lombok依赖</h4><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- https://mvnrepository.com/artifact/org.projectlombok/lombok --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>1.18.12<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test3&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test3</span><span class="params">(User user)</span></span>&#123;</span><br><span class="line">    System.out.println(user);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时传递三个参数会对应注入到实体类对应的名称下，没有传递的初始值对应设置为java默认初始值</p>
+<p>如果此时引入@RequestParam，则必须以对象的形式传参</p>
+<h2 id="数据回显"><a href="#数据回显" class="headerlink" title="数据回显"></a>数据回显</h2><h3 id="第一种-通过ModelAndView"><a href="#第一种-通过ModelAndView" class="headerlink" title="第一种 : 通过ModelAndView"></a>第一种 : 通过ModelAndView</h3><p>实现controller接口一般用这个，我们前面一直都是如此 . 就不过多解释</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ControllerTest1</span> <span class="keyword">implements</span> <span class="title">Controller</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ModelAndView <span class="title">handleRequest</span><span class="params">(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">       <span class="comment">//返回一个模型视图对象</span></span><br><span class="line">       ModelAndView mv = <span class="keyword">new</span> ModelAndView();</span><br><span class="line">       mv.addObject(<span class="string">&quot;msg&quot;</span>,<span class="string">&quot;ControllerTest1&quot;</span>);</span><br><span class="line">       mv.setViewName(<span class="string">&quot;test&quot;</span>);</span><br><span class="line">       <span class="keyword">return</span> mv;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第二种-通过ModelMap"><a href="#第二种-通过ModelMap" class="headerlink" title="第二种 : 通过ModelMap"></a>第二种 : 通过ModelMap</h3><p>ModelMap是LinkedHashMap的子类，相比于Model多了HashMap相关的功能</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test5&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">(<span class="meta">@RequestParam(&quot;username&quot;)</span> String name, ModelMap model)</span></span>&#123;</span><br><span class="line">   <span class="comment">//封装要显示到视图中的数据</span></span><br><span class="line">   <span class="comment">//相当于req.setAttribute(&quot;name&quot;,name);</span></span><br><span class="line">   model.addAttribute(<span class="string">&quot;name&quot;</span>,name);</span><br><span class="line">   System.out.println(name);</span><br><span class="line">   <span class="keyword">return</span> <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="第三种-通过Model"><a href="#第三种-通过Model" class="headerlink" title="第三种 : 通过Model"></a>第三种 : 通过Model</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test6&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">hello</span><span class="params">(<span class="meta">@RequestParam(&quot;username&quot;)</span> String name, Model model)</span></span>&#123;</span><br><span class="line">   <span class="comment">//封装要显示到视图中的数据</span></span><br><span class="line">   <span class="comment">//相当于req.setAttribute(&quot;name&quot;,name);</span></span><br><span class="line">   model.addAttribute(<span class="string">&quot;msg&quot;</span>,name);</span><br><span class="line">   System.out.println(name);</span><br><span class="line">   <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对比"><a href="#对比" class="headerlink" title="对比"></a>对比</h3><ul>
+<li><p>Model 只有寥寥几个方法只适合用于储存数据，简化了新手对于Model对象的操作和理解；</p>
+</li>
+<li><p>ModelMap 继承了 LinkedHashMap ，除了实现了自身的一些方法，同样的继承 LinkedMap 的方法和特性；</p>
+</li>
+<li><p>ModelAndView 可以在储存数据的同时，可以进行设置返回的逻辑视图，进行控制展示层的跳转。</p>
+</li>
+</ul>
+<h2 id="处理乱码"><a href="#处理乱码" class="headerlink" title="处理乱码"></a>处理乱码</h2><p>如果是url传参，在MVC中本来就不会乱码。但是其他请求依旧需要过滤器，比如表单提交</p>
+<h3 id="创建一个提交表单"><a href="#创建一个提交表单" class="headerlink" title="创建一个提交表单"></a>创建一个提交表单</h3><p>注意表单提交走的重定向，注意这个地址要把项目名也加上。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;%@ page contentType=<span class="string">&quot;text/html;charset=UTF-8&quot;</span> language=<span class="string">&quot;java&quot;</span> %&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">  &lt;head&gt;</span><br><span class="line">    &lt;title&gt;$Title$&lt;/title&gt;</span><br><span class="line">  &lt;/head&gt;</span><br><span class="line">  &lt;body&gt;</span><br><span class="line">  &lt;form action=<span class="string">&quot;/SpringMVC_05_Model_and_MessyCode_war_exploded/test5&quot;</span> method=<span class="string">&quot;post&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;text&quot;</span> name=<span class="string">&quot;name&quot;</span>&gt;</span><br><span class="line">    &lt;input type=<span class="string">&quot;submit&quot;</span>&gt;</span><br><span class="line">  &lt;/form&gt;</span><br><span class="line">  &lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对应的Controller"><a href="#对应的Controller" class="headerlink" title="对应的Controller"></a>对应的Controller</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(&quot;/test5&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">test1</span><span class="params">(Model model, String name)</span></span>&#123;</span><br><span class="line">    model.addAttribute(<span class="string">&quot;msg&quot;</span>,name);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">&quot;test&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此时如果通过表单提交中文会产生乱码</p>
+<h3 id="使用MVC的CharacterEncodingFilter"><a href="#使用MVC的CharacterEncodingFilter" class="headerlink" title="使用MVC的CharacterEncodingFilter"></a>使用MVC的CharacterEncodingFilter</h3><p>我们可以自己写一个filter，自己重写dofilter，但是MVC中已经提供了很好的封装</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-class</span>&gt;</span>org.springframework.web.filter.CharacterEncodingFilter<span class="tag">&lt;/<span class="name">filter-class</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">init-param</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">param-name</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">param-value</span>&gt;</span>utf-8<span class="tag">&lt;/<span class="name">param-value</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">init-param</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">filter-mapping</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">filter-name</span>&gt;</span>encoding<span class="tag">&lt;/<span class="name">filter-name</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">url-pattern</span>&gt;</span>/*<span class="tag">&lt;/<span class="name">url-pattern</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">filter-mapping</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>绝大多数乱码问题都会解决。如果依旧产生乱码，可能浏览器或者系统的默认编码方式有问题</p>
+<p>具体可以参考<a target="_blank" rel="noopener" href="http://mp.weixin.qq.com/s?__biz=Mzg2NTAzMTExNg==&chksm=ce6104fdf9168deb32664243023d374b336f2a4260b55846b533a8be70d2f9bc97e45f4ede47&idx=1&mid=2247483998&scene=21&sn=97c417a2c1484d694c761a2ad27f217d#wechat_redirect">狂神说SpringMVC04：数据处理及跳转</a></p>
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>rainingapple
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://rainingapple.cn/2021/02/06/SpringMVC-04-Model-and-MessyCode/" title="SpringMVC-04-Model_and_MessyCode">http://rainingapple.cn/2021/02/06/SpringMVC-04-Model-and-MessyCode/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Java/" rel="tag"># Java</a>
+              <a href="/tags/Spring/" rel="tag"># Spring</a>
+              <a href="/tags/SpringMVC/" rel="tag"># SpringMVC</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/02/05/SpringMVC-03-%E8%BD%AC%E5%8F%91%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/" rel="prev" title="SpringMVC-03-转发与重定向">
+      <i class="fa fa-chevron-left"></i> SpringMVC-03-转发与重定向
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/02/06/SpringMVC-05-Json/" rel="next" title="SpringMVC-05-JSON">
+      SpringMVC-05-JSON <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC-04-Model-and-MessyCode"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC-04-Model_and_MessyCode</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%AF%B7%E6%B1%82%E8%A1%8C%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="nav-number">1.1.</span> <span class="nav-text">请求行数据处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E7%9A%84%E5%9F%9F%E5%90%8D%E7%A7%B0%E5%92%8C%E5%A4%84%E7%90%86%E6%96%B9%E6%B3%95%E7%9A%84%E5%8F%82%E6%95%B0%E5%90%8D%E4%B8%80%E8%87%B4"><span class="nav-number">1.1.1.</span> <span class="nav-text">提交的域名称和处理方法的参数名一致</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RequestParam"><span class="nav-number">1.1.2.</span> <span class="nav-text">@RequestParam</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E4%BA%A4%E5%AF%B9%E8%B1%A1"><span class="nav-number">1.1.3.</span> <span class="nav-text">提交对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E6%9E%84%E9%80%A0%E5%AE%9E%E4%BD%93%E7%B1%BBUser"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">对应构造实体类User</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%BA%94%E5%BC%95%E5%85%A5lombok%E4%BE%9D%E8%B5%96"><span class="nav-number">1.1.3.2.</span> <span class="nav-text">使用注解应引入lombok依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">1.1.3.3.</span> <span class="nav-text">测试</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%9B%9E%E6%98%BE"><span class="nav-number">1.2.</span> <span class="nav-text">数据回显</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E7%A7%8D-%E9%80%9A%E8%BF%87ModelAndView"><span class="nav-number">1.2.1.</span> <span class="nav-text">第一种 : 通过ModelAndView</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E7%A7%8D-%E9%80%9A%E8%BF%87ModelMap"><span class="nav-number">1.2.2.</span> <span class="nav-text">第二种 : 通过ModelMap</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E7%A7%8D-%E9%80%9A%E8%BF%87Model"><span class="nav-number">1.2.3.</span> <span class="nav-text">第三种 : 通过Model</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.4.</span> <span class="nav-text">对比</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%84%E7%90%86%E4%B9%B1%E7%A0%81"><span class="nav-number">1.3.</span> <span class="nav-text">处理乱码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E6%8F%90%E4%BA%A4%E8%A1%A8%E5%8D%95"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建一个提交表单</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E5%BA%94%E7%9A%84Controller"><span class="nav-number">1.3.2.</span> <span class="nav-text">对应的Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8MVC%E7%9A%84CharacterEncodingFilter"><span class="nav-number">1.3.3.</span> <span class="nav-text">使用MVC的CharacterEncodingFilter</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">rainingapple</p>
+  <div class="site-description" itemprop="description">划水也要划得自在</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainingapple</span>
+  <span>&nbsp;<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn"> 冀ICP备-2020030169号</a></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '92659aa3d0b96dcc89ba',
+      clientSecret: '0a7caa683d281a88960c565ce4e0dc38c8976a9c',
+      repo        : 'my_blog_comment',
+      owner       : 'rainingapple',
+      admin       : ['rainingapple'],
+      id          : '0aa8cb0ae6bc52a0e0b9d6ebb10da917',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var i=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){i&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,e,a=0;a<r.length;a++)t=r[a],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>

@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="概述GRASP(General Responsibility Assignment Software Patterns )，即通用职责分配软件模式 通常在面向对象设计中指导为类和对象分配职责">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GRASP">
+<meta property="og:url" content="http://rainingapple.cn/2020/10/25/GRASP/index.html">
+<meta property="og:site_name" content="rainingappleMK">
+<meta property="og:description" content="概述GRASP(General Responsibility Assignment Software Patterns )，即通用职责分配软件模式 通常在面向对象设计中指导为类和对象分配职责">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-25T08:56:16.000Z">
+<meta property="article:modified_time" content="2020-10-25T08:58:25.433Z">
+<meta property="article:author" content="rainingapple">
+<meta property="article:tag" content="设计模式">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://rainingapple.cn/2020/10/25/GRASP/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>GRASP | rainingappleMK</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+    <div class="headband"></div>
+    <a target="_blank" rel="noopener" href="https://github.com/rainingapple" class="github-corner" aria-label="View source on GitHub"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">rainingappleMK</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2020/10/25/GRASP/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          GRASP
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-10-25 16:56:16 / 修改时间：16:58:25" itemprop="dateCreated datePublished" datetime="2020-10-25T16:56:16+08:00">2020-10-25</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" itemprop="url" rel="index"><span itemprop="name">设计模式</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>GRASP(General Responsibility Assignment Software Patterns )，即通用职责分配软件模式</p>
+<p>通常在面向对象设计中指导为类和对象分配职责</p>
+<a id="more"></a>
+
+<h2 id="GRASP中概念主要有"><a href="#GRASP中概念主要有" class="headerlink" title="GRASP中概念主要有:"></a>GRASP中概念主要有:</h2><ul>
+<li>Information Expert</li>
+<li>Creator</li>
+<li>Controller</li>
+<li>Low Coupling</li>
+<li>High Cohesion </li>
+<li>Polymorphism </li>
+<li>Pure Fabrication</li>
+<li>Indirection, </li>
+<li>Protected Variations</li>
+</ul>
+<p>这些模式解决了常见的许多软件设计问题。这些技术的发明虽然没有创造新的工作方法，但是为面向对象设计中经过测试检验的已经存在的准则，提供了更好的记录和规范化途径。</p>
+<h3 id="Information-Expert"><a href="#Information-Expert" class="headerlink" title="Information Expert"></a>Information Expert</h3><p>信息专家决定如何分配职责，即对于给定的职责，为其分配所需的信息，决定信息储存在何处。</p>
+<ul>
+<li>某个类拥有完成某个职责所需要的所有信息，这个职责就应该分配给这个类来实现</li>
+<li>专家模式用来分配职责，根据给定的职责去查询和存储信息</li>
+</ul>
+<h4 id="由此，设想一个场景，市场上有一些商品，储存着与商品相关的所有信息。"><a href="#由此，设想一个场景，市场上有一些商品，储存着与商品相关的所有信息。" class="headerlink" title="由此，设想一个场景，市场上有一些商品，储存着与商品相关的所有信息。"></a>由此，设想一个场景，市场上有一些商品，储存着与商品相关的所有信息。</h4><h4 id="要求实现判断某一商品是不是给定的一个商品种类（如苹果是不是一种桃子）"><a href="#要求实现判断某一商品是不是给定的一个商品种类（如苹果是不是一种桃子）" class="headerlink" title="要求实现判断某一商品是不是给定的一个商品种类（如苹果是不是一种桃子）"></a>要求实现判断某一商品是不是给定的一个商品种类（如苹果是不是一种桃子）</h4><h4 id="那么根据信息专家原则，该职责应该分配给商品本身。"><a href="#那么根据信息专家原则，该职责应该分配给商品本身。" class="headerlink" title="那么根据信息专家原则，该职责应该分配给商品本身。"></a>那么根据信息专家原则，该职责应该分配给商品本身。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象商品特征，构建商品父类</span></span><br><span class="line"><span class="comment">//商品都有价格、id属性，以及isequal（）方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Commodity</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> commodity_id;</span><br><span class="line">    <span class="keyword">int</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Commodity</span><span class="params">(<span class="keyword">int</span> commodity_id, <span class="keyword">int</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.commodity_id = commodity_id;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isequal</span><span class="params">(Commodity c_another)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.commodity_id==c_another.commodity_id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Apple与Peach是继承自Commodity的具体商品种类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Commodity</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Apple</span><span class="params">(<span class="keyword">int</span> pc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">1</span>,pc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Peach</span> <span class="keyword">extends</span> <span class="title">Commodity</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Peach</span><span class="params">(<span class="keyword">int</span> pc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">2</span>,pc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//当某类（如管理订单的购物车程序）需要检查是否是一个种类时，应该调用信息专家类的isequal（）方法，而不是自己重新写一个</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shopping_Trolley</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(Commodity c1, Commodity c2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c1.isequal(c2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//不应该像下面这么设计，应该把职责分配给拥有所有信息处理这个的类</span></span><br><span class="line">    <span class="comment">/*public boolean check(Commodity c1,Commodity c2)&#123;</span></span><br><span class="line"><span class="comment">        return c1.commodity_id==c2.commodity_id;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Creator"><a href="#Creator" class="headerlink" title="Creator"></a>Creator</h3><p>通俗的来说，B是A的Creator，当且仅当满足以下一个或多个条件：</p>
+<ul>
+<li>B的实例是A的实例的容器</li>
+<li>B的实例是A的实例的聚合</li>
+<li>B的实例记录A的实例</li>
+<li>B的实例密切地使用A的实例</li>
+<li>B的实例含有A的实例的初始化信息并传递给构造方法</li>
+</ul>
+<h4 id="根据Creator原则，应该这样创建："><a href="#根据Creator原则，应该这样创建：" class="headerlink" title="根据Creator原则，应该这样创建："></a>根据Creator原则，应该这样创建：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shopping_Trolley</span> </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> Vector&lt;Commodity&gt; commodities_list = <span class="keyword">new</span> Vector&lt;Commodity&gt;(<span class="number">500</span>);</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">check</span><span class="params">(Commodity c1, Commodity c2)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> c1.isequal(c2);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//不应该像下面这么设计，应该把职责分配给拥有所有信息处理这个的类</span></span><br><span class="line">    <span class="comment">/*public boolean check(Commodity c1,Commodity c2)&#123;</span></span><br><span class="line"><span class="comment">        return c1.commodity_id==c2.commodity_id;</span></span><br><span class="line"><span class="comment">    &#125;*/</span></span><br><span class="line">    <span class="comment">//购物车的实例是商品的实例的容器，购物车的实例密切使用商品的实例，购物车的实例记录着商品的实例。</span></span><br><span class="line">    <span class="comment">//显然，购物车是商品的creator，应该由购物车创建商品。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">add_commodity</span><span class="params">(<span class="keyword">int</span> mode,<span class="keyword">int</span> price)</span></span>&#123;</span><br><span class="line">        <span class="comment">//加入时由容器创建</span></span><br><span class="line">        commodities_list.add(<span class="keyword">new</span> Commodity(mode,price));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Low-Coupling（低耦合）"><a href="#Low-Coupling（低耦合）" class="headerlink" title="Low Coupling（低耦合）"></a>Low Coupling（低耦合）</h3><p>低耦合是一个估计单元，其规定了分配职责的准则：</p>
+<ul>
+<li>类间依赖性低</li>
+<li>类的改变对其他类影响小</li>
+<li>高可复用可能性</li>
+</ul>
+<p>下面情况会造成A、B间的耦合：</p>
+<ul>
+<li>A是B的属性</li>
+<li>A调用B实例中的方法</li>
+<li>A方法中引用了B</li>
+<li>A实现B</li>
+</ul>
+<h4 id="具体来说，要避免下面的情况："><a href="#具体来说，要避免下面的情况：" class="headerlink" title="具体来说，要避免下面的情况："></a>具体来说，要避免下面的情况：</h4><ul>
+<li>Don’t Talk to Strangers ，意思就是说，不需要通信的两个对象之间，不要进行无谓的连接。</li>
+<li>如果 A 已经和 B 有连接，如果分配 A 的职责给 B 不合适的话（违反信息专家模式），那么就把 B 的职责分配给 A。</li>
+<li>两个不同模块的内部类之间不能连接。</li>
+</ul>
+<h5 id="一和三比较容易理解，具体考虑一下第二项："><a href="#一和三比较容易理解，具体考虑一下第二项：" class="headerlink" title="一和三比较容易理解，具体考虑一下第二项："></a>一和三比较容易理解，具体考虑一下第二项：</h5><p>假设管理员管理着订单，而他想要统计订单数量，那么显然这个职责分配给管理员是不合适的，违反信息专家原则。</p>
+<p>那么应该把职责分配给订单，提高订单的内聚性，降低类间耦合。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Shop_Manager</span> </span>&#123;</span><br><span class="line">    Shopping_Trolley shopping_trolley;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//考虑到管理员管理的订单可以变动，不讲设置订单写在构造函数。</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setShopping_trolley</span><span class="params">(Shopping_Trolley shopping_trolley)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.shopping_trolley = shopping_trolley;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get_num_of_Trolley</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> shopping_trolley.get_price_total();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Controller"><a href="#Controller" class="headerlink" title="Controller"></a>Controller</h3><ul>
+<li>控制器对象负责接收处理系统事件，应用情境的控制器应该用来处理情境中所有的系统事件。</li>
+<li>它是除了前端之外第一个接收协调控制系统操作的对象。</li>
+<li>控制器应该授权其它类对应的职责，协调控制其对应的行为。自己不应处理过多事务</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Center_Manager</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Shopping_Trolley shopping_trolley = <span class="keyword">new</span> Shopping_Trolley();</span><br><span class="line">        Shop_Manager shop_manager = <span class="keyword">new</span> Shop_Manager();</span><br><span class="line">        shop_manager.setShopping_trolley(shopping_trolley);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建其他超市系统中可能出现的模组</span></span><br><span class="line">        Maintainer maintainer = <span class="keyword">new</span> Maintainer();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(case1)&#123;</span><br><span class="line">            <span class="comment">//假设case1为超市进货事件</span></span><br><span class="line">            <span class="comment">//那么核心控制器做出反应，指派对应的超市管理员完成工作</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(case2)&#123;</span><br><span class="line">            <span class="comment">//假设case2为超市货架故障</span></span><br><span class="line">            <span class="comment">//那么核心控制器做出反应，指派维修工到指定地点维修。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="High-Cohesion（高内聚）"><a href="#High-Cohesion（高内聚）" class="headerlink" title="High Cohesion（高内聚）"></a>High Cohesion（高内聚）</h3><ul>
+<li>高内聚致力于保证对象间的高聚集性、易管理型、可理解性，为类间低耦合提供支持</li>
+<li>高聚合意味着一组元素是高度相关且高度聚合的。将一个大型系统分解为具体类和子系统可以增加系统内聚性。否则，过于冗杂的元素会使系统聚合性降低。</li>
+<li>低聚合会导致难以理解、难以复用、难以维护、难以修改</li>
+</ul>
+<p>专职由专人来做，与超市订单相关的如统计订单信息、修改某一商品信息、删除商品信息，应该由订单类完成</p>
+<p>相对的，如订单不直接相关，比如维修与进货事件，应该交给其他的人来做。</p>
+<h3 id="Pure-Fabrication"><a href="#Pure-Fabrication" class="headerlink" title="Pure Fabrication"></a>Pure Fabrication</h3><ul>
+<li>纯虚构不在问题领域中代表任意概念，仅仅为实现类间低耦合、类内高聚合、可复用而存在</li>
+<li>在领域驱动设计中一般称为Service</li>
+</ul>
+<h4 id="这里就拿Java本身的多层抽象举例："><a href="#这里就拿Java本身的多层抽象举例：" class="headerlink" title="这里就拿Java本身的多层抽象举例："></a>这里就拿Java本身的多层抽象举例：</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Iterable</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Iterable</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">interface</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">abstract</span> <span class="title">class</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractCollection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class"><span class="title">public</span> <span class="title">class</span> <span class="title">ArrayList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">AbstractList</span>&lt;<span class="title">E</span>&gt; <span class="keyword">implements</span> <span class="title">List</span>&lt;<span class="title">E</span>&gt;, <span class="title">RandomAccess</span>, <span class="title">Cloneable</span>, <span class="title">Serializable</span></span></span><br></pre></td></tr></table></figure>
+
+<p>顶层的Iterable与Collection抽象允许java对可迭代与收集类进行自由的扩展，按照Collection官方文档所说：</p>
+<p>The JDK does not provide any <em>direct</em> implementations of this interface: it provides implementations of more specific subinterfaces like <code>Set</code> and <code>List</code>. This interface is typically used to pass collections around and manipulate them where maximum generality is desired.</p>
+<p>官方没有提供直接的实现，而是提供了子接口Set和List。所以Colection用于最顶层的数组与集合传递。</p>
+<p>由此便实现了低耦合、高内聚、可复用、以及高扩展性。</p>
+<h3 id="Indirection"><a href="#Indirection" class="headerlink" title="Indirection"></a>Indirection</h3><ul>
+<li>间接模块用于支持低耦合，通常通过分配为直接对象分配调节实现。</li>
+<li>常见的例子是在model和data层之间加入控制器组件</li>
+</ul>
+<h4 id="我认为控制器就是最典型的间接层"><a href="#我认为控制器就是最典型的间接层" class="headerlink" title="我认为控制器就是最典型的间接层"></a>我认为控制器就是最典型的间接层</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//假如超市管理员发现货架异常，不应该直接与维修工联系，而应该传递消息给总控制类，再由总控制类调用维修工</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Center_Manager</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Shopping_Trolley shopping_trolley = <span class="keyword">new</span> Shopping_Trolley();</span><br><span class="line">        Shop_Manager shop_manager = <span class="keyword">new</span> Shop_Manager();</span><br><span class="line">        shop_manager.setShopping_trolley(shopping_trolley);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建其他超市系统中可能出现的模组（维修工）</span></span><br><span class="line">        Maintainer maintainer = <span class="keyword">new</span> Maintainer();</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span>(case1)&#123;</span><br><span class="line">            <span class="comment">//假设case1为超市进货事件</span></span><br><span class="line">            <span class="comment">//那么核心控制器做出反应，指派对应的超市管理员完成工作</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(case2)&#123;</span><br><span class="line">            <span class="comment">//假设case2为超市管理员报告超市货架故障</span></span><br><span class="line">            <span class="comment">//那么核心控制器做出反应，根据超市管理员给出的问题信息，指派维修工到指定地点维修。</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Protected-Variations"><a href="#Protected-Variations" class="headerlink" title="Protected Variations"></a>Protected Variations</h3><ul>
+<li>保护元素不受其他元素的变化的影响</li>
+<li>可以通过将不确定的模块用抽象类封装，通过多态实现接口实现</li>
+</ul>
+<h4 id="还是商品类的例子，尽管具体的商品千变万化，可以是苹果可以是梨。价格和具体种类也不定。"><a href="#还是商品类的例子，尽管具体的商品千变万化，可以是苹果可以是梨。价格和具体种类也不定。" class="headerlink" title="还是商品类的例子，尽管具体的商品千变万化，可以是苹果可以是梨。价格和具体种类也不定。"></a>还是商品类的例子，尽管具体的商品千变万化，可以是苹果可以是梨。价格和具体种类也不定。</h4><h4 id="但是把商品的共性提取成父类再设计接口掩盖底层细节，便可借助多态可以实现保护元素的不变性。"><a href="#但是把商品的共性提取成父类再设计接口掩盖底层细节，便可借助多态可以实现保护元素的不变性。" class="headerlink" title="但是把商品的共性提取成父类再设计接口掩盖底层细节，便可借助多态可以实现保护元素的不变性。"></a>但是把商品的共性提取成父类再设计接口掩盖底层细节，便可借助多态可以实现保护元素的不变性。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//抽象商品特征，构建商品父类</span></span><br><span class="line"><span class="comment">//商品都有价格、id属性，以及isequal（）方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Commodity_Abs</span> </span>&#123;</span><br><span class="line">    <span class="comment">//。。。。。</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Commodity</span> <span class="keyword">implements</span> <span class="title">Commodity_Abs</span></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> commodity_id;</span><br><span class="line">    <span class="keyword">int</span> price;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Commodity</span><span class="params">(<span class="keyword">int</span> commodity_id, <span class="keyword">int</span> price)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.commodity_id = commodity_id;</span><br><span class="line">        <span class="keyword">this</span>.price = price;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isequal</span><span class="params">(Commodity c_another)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.commodity_id==c_another.commodity_id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//Apple与Peach是继承自Commodity的具体商品种类</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Apple</span> <span class="keyword">extends</span> <span class="title">Commodity</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Apple</span><span class="params">(<span class="keyword">int</span> pc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">1</span>,pc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Peach</span> <span class="keyword">extends</span> <span class="title">Commodity</span></span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Peach</span><span class="params">(<span class="keyword">int</span> pc)</span></span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(<span class="number">2</span>,pc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+    </div>
+
+    
+    
+    
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>rainingapple
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://rainingapple.cn/2020/10/25/GRASP/" title="GRASP">http://rainingapple.cn/2020/10/25/GRASP/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag"># 设计模式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/10/22/PythonLearn-05-Numpy%E5%9F%BA%E7%A1%80/" rel="prev" title="PythonLearn-05-Numpy基础">
+      <i class="fa fa-chevron-left"></i> PythonLearn-05-Numpy基础
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/11/10/MVC-MVP-MVVM/" rel="next" title="MVC MVP MVVM">
+      MVC MVP MVVM <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#GRASP%E4%B8%AD%E6%A6%82%E5%BF%B5%E4%B8%BB%E8%A6%81%E6%9C%89"><span class="nav-number">1.1.</span> <span class="nav-text">GRASP中概念主要有:</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Information-Expert"><span class="nav-number">1.1.1.</span> <span class="nav-text">Information Expert</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%B1%E6%AD%A4%EF%BC%8C%E8%AE%BE%E6%83%B3%E4%B8%80%E4%B8%AA%E5%9C%BA%E6%99%AF%EF%BC%8C%E5%B8%82%E5%9C%BA%E4%B8%8A%E6%9C%89%E4%B8%80%E4%BA%9B%E5%95%86%E5%93%81%EF%BC%8C%E5%82%A8%E5%AD%98%E7%9D%80%E4%B8%8E%E5%95%86%E5%93%81%E7%9B%B8%E5%85%B3%E7%9A%84%E6%89%80%E6%9C%89%E4%BF%A1%E6%81%AF%E3%80%82"><span class="nav-number">1.1.1.1.</span> <span class="nav-text">由此，设想一个场景，市场上有一些商品，储存着与商品相关的所有信息。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%81%E6%B1%82%E5%AE%9E%E7%8E%B0%E5%88%A4%E6%96%AD%E6%9F%90%E4%B8%80%E5%95%86%E5%93%81%E6%98%AF%E4%B8%8D%E6%98%AF%E7%BB%99%E5%AE%9A%E7%9A%84%E4%B8%80%E4%B8%AA%E5%95%86%E5%93%81%E7%A7%8D%E7%B1%BB%EF%BC%88%E5%A6%82%E8%8B%B9%E6%9E%9C%E6%98%AF%E4%B8%8D%E6%98%AF%E4%B8%80%E7%A7%8D%E6%A1%83%E5%AD%90%EF%BC%89"><span class="nav-number">1.1.1.2.</span> <span class="nav-text">要求实现判断某一商品是不是给定的一个商品种类（如苹果是不是一种桃子）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%82%A3%E4%B9%88%E6%A0%B9%E6%8D%AE%E4%BF%A1%E6%81%AF%E4%B8%93%E5%AE%B6%E5%8E%9F%E5%88%99%EF%BC%8C%E8%AF%A5%E8%81%8C%E8%B4%A3%E5%BA%94%E8%AF%A5%E5%88%86%E9%85%8D%E7%BB%99%E5%95%86%E5%93%81%E6%9C%AC%E8%BA%AB%E3%80%82"><span class="nav-number">1.1.1.3.</span> <span class="nav-text">那么根据信息专家原则，该职责应该分配给商品本身。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Creator"><span class="nav-number">1.1.2.</span> <span class="nav-text">Creator</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%B9%E6%8D%AECreator%E5%8E%9F%E5%88%99%EF%BC%8C%E5%BA%94%E8%AF%A5%E8%BF%99%E6%A0%B7%E5%88%9B%E5%BB%BA%EF%BC%9A"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">根据Creator原则，应该这样创建：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Low-Coupling%EF%BC%88%E4%BD%8E%E8%80%A6%E5%90%88%EF%BC%89"><span class="nav-number">1.1.3.</span> <span class="nav-text">Low Coupling（低耦合）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B7%E4%BD%93%E6%9D%A5%E8%AF%B4%EF%BC%8C%E8%A6%81%E9%81%BF%E5%85%8D%E4%B8%8B%E9%9D%A2%E7%9A%84%E6%83%85%E5%86%B5%EF%BC%9A"><span class="nav-number">1.1.3.1.</span> <span class="nav-text">具体来说，要避免下面的情况：</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%B8%80%E5%92%8C%E4%B8%89%E6%AF%94%E8%BE%83%E5%AE%B9%E6%98%93%E7%90%86%E8%A7%A3%EF%BC%8C%E5%85%B7%E4%BD%93%E8%80%83%E8%99%91%E4%B8%80%E4%B8%8B%E7%AC%AC%E4%BA%8C%E9%A1%B9%EF%BC%9A"><span class="nav-number">1.1.3.1.1.</span> <span class="nav-text">一和三比较容易理解，具体考虑一下第二项：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Controller"><span class="nav-number">1.1.4.</span> <span class="nav-text">Controller</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#High-Cohesion%EF%BC%88%E9%AB%98%E5%86%85%E8%81%9A%EF%BC%89"><span class="nav-number">1.1.5.</span> <span class="nav-text">High Cohesion（高内聚）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pure-Fabrication"><span class="nav-number">1.1.6.</span> <span class="nav-text">Pure Fabrication</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%99%E9%87%8C%E5%B0%B1%E6%8B%BFJava%E6%9C%AC%E8%BA%AB%E7%9A%84%E5%A4%9A%E5%B1%82%E6%8A%BD%E8%B1%A1%E4%B8%BE%E4%BE%8B%EF%BC%9A"><span class="nav-number">1.1.6.1.</span> <span class="nav-text">这里就拿Java本身的多层抽象举例：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Indirection"><span class="nav-number">1.1.7.</span> <span class="nav-text">Indirection</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%88%91%E8%AE%A4%E4%B8%BA%E6%8E%A7%E5%88%B6%E5%99%A8%E5%B0%B1%E6%98%AF%E6%9C%80%E5%85%B8%E5%9E%8B%E7%9A%84%E9%97%B4%E6%8E%A5%E5%B1%82"><span class="nav-number">1.1.7.1.</span> <span class="nav-text">我认为控制器就是最典型的间接层</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Protected-Variations"><span class="nav-number">1.1.8.</span> <span class="nav-text">Protected Variations</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%98%E6%98%AF%E5%95%86%E5%93%81%E7%B1%BB%E7%9A%84%E4%BE%8B%E5%AD%90%EF%BC%8C%E5%B0%BD%E7%AE%A1%E5%85%B7%E4%BD%93%E7%9A%84%E5%95%86%E5%93%81%E5%8D%83%E5%8F%98%E4%B8%87%E5%8C%96%EF%BC%8C%E5%8F%AF%E4%BB%A5%E6%98%AF%E8%8B%B9%E6%9E%9C%E5%8F%AF%E4%BB%A5%E6%98%AF%E6%A2%A8%E3%80%82%E4%BB%B7%E6%A0%BC%E5%92%8C%E5%85%B7%E4%BD%93%E7%A7%8D%E7%B1%BB%E4%B9%9F%E4%B8%8D%E5%AE%9A%E3%80%82"><span class="nav-number">1.1.8.1.</span> <span class="nav-text">还是商品类的例子，尽管具体的商品千变万化，可以是苹果可以是梨。价格和具体种类也不定。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%86%E6%98%AF%E6%8A%8A%E5%95%86%E5%93%81%E7%9A%84%E5%85%B1%E6%80%A7%E6%8F%90%E5%8F%96%E6%88%90%E7%88%B6%E7%B1%BB%E5%86%8D%E8%AE%BE%E8%AE%A1%E6%8E%A5%E5%8F%A3%E6%8E%A9%E7%9B%96%E5%BA%95%E5%B1%82%E7%BB%86%E8%8A%82%EF%BC%8C%E4%BE%BF%E5%8F%AF%E5%80%9F%E5%8A%A9%E5%A4%9A%E6%80%81%E5%8F%AF%E4%BB%A5%E5%AE%9E%E7%8E%B0%E4%BF%9D%E6%8A%A4%E5%85%83%E7%B4%A0%E7%9A%84%E4%B8%8D%E5%8F%98%E6%80%A7%E3%80%82"><span class="nav-number">1.1.8.2.</span> <span class="nav-text">但是把商品的共性提取成父类再设计接口掩盖底层细节，便可借助多态可以实现保护元素的不变性。</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">rainingapple</p>
+  <div class="site-description" itemprop="description">划水也要划得自在</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">rainingapple</span>
+  <span>&nbsp;<a target="_blank" rel="noopener" href="http://beian.miit.gov.cn"> 冀ICP备-2020030169号</a></span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+    <script defer src="/lib/three/canvas_lines.min.js"></script>
+    <script defer src="/lib/three/canvas_sphere.min.js"></script>
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID    : '92659aa3d0b96dcc89ba',
+      clientSecret: '0a7caa683d281a88960c565ce4e0dc38c8976a9c',
+      repo        : 'my_blog_comment',
+      owner       : 'rainingapple',
+      admin       : ['rainingapple'],
+      id          : 'e14951e407224c6960e725e44f14e144',
+        language: 'zh-CN',
+      distractionFreeMode: true
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+});
+</script>
+
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=o;var i=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function o(){i&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,e,a=0;a<r.length;a++)t=r[a],e=void 0,0<=(e=t.getBoundingClientRect()).bottom&&0<=e.left&&e.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}o(),n.addEventListener("scroll",function(){var t,e;t=o,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+</html>
