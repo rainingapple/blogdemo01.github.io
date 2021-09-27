@@ -20,22 +20,20 @@
     var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="SpringMVC-03-Forward_and_RedirectSpringMVC 对基本的转发与重定向操作有了更好的封装 通过智能的处理器、适配器、视图解析器，我们可以方便的解析路径地址 并且，SpringMVC对原生的Servlet功能可以做到完全兼容">
+  <meta name="description" content="2021.9.27 交易日志指数 上证指数平量跌破五日线，强势区死叉区间。暂时没有止跌信号，如果明天15、30、60分钟底背离确认才有可能展开反弹，最差情况可能要等回落到零轴附近甚至考验半年线了。  上证50在白酒带领下强势上攻，换手率依旧很低，后续最好情况下可以直接展开一浪，但是一浪我也不会参与。  中证500在资源下跌影响下直接下探季线，暂时没有止跌信号，如果明天15、30、60分钟底背离确认">
 <meta property="og:type" content="article">
-<meta property="og:title" content="SpringMVC-03-转发与重定向">
-<meta property="og:url" content="http://rainingapple.cn/2021/02/05/SpringMVC-03-%E8%BD%AC%E5%8F%91%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/index.html">
+<meta property="og:title" content="2021-9-27-交易日志">
+<meta property="og:url" content="http://rainingapple.cn/2021/09/27/2021-9-27-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/index.html">
 <meta property="og:site_name" content="rainingappleMK">
-<meta property="og:description" content="SpringMVC-03-Forward_and_RedirectSpringMVC 对基本的转发与重定向操作有了更好的封装 通过智能的处理器、适配器、视图解析器，我们可以方便的解析路径地址 并且，SpringMVC对原生的Servlet功能可以做到完全兼容">
+<meta property="og:description" content="2021.9.27 交易日志指数 上证指数平量跌破五日线，强势区死叉区间。暂时没有止跌信号，如果明天15、30、60分钟底背离确认才有可能展开反弹，最差情况可能要等回落到零轴附近甚至考验半年线了。  上证50在白酒带领下强势上攻，换手率依旧很低，后续最好情况下可以直接展开一浪，但是一浪我也不会参与。  中证500在资源下跌影响下直接下探季线，暂时没有止跌信号，如果明天15、30、60分钟底背离确认">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2021-02-05T12:56:38.000Z">
-<meta property="article:modified_time" content="2021-02-09T11:50:41.404Z">
+<meta property="article:published_time" content="2021-09-27T14:49:44.000Z">
+<meta property="article:modified_time" content="2021-09-27T15:40:55.960Z">
 <meta property="article:author" content="rainingapple">
-<meta property="article:tag" content="Java">
-<meta property="article:tag" content="Spring">
-<meta property="article:tag" content="SpringMVC">
+<meta property="article:tag" content="交易日志">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://rainingapple.cn/2021/02/05/SpringMVC-03-%E8%BD%AC%E5%8F%91%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/">
+<link rel="canonical" href="http://rainingapple.cn/2021/09/27/2021-9-27-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/">
 
 
 <script id="page-configurations">
@@ -48,7 +46,7 @@
   };
 </script>
 
-  <title>SpringMVC-03-转发与重定向 | rainingappleMK</title>
+  <title>2021-9-27-交易日志 | rainingappleMK</title>
   
 
 
@@ -169,7 +167,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/05/SpringMVC-03-%E8%BD%AC%E5%8F%91%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/09/27/2021-9-27-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -182,7 +180,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          SpringMVC-03-转发与重定向
+          2021-9-27-交易日志
         </h1>
 
         <div class="post-meta">
@@ -191,23 +189,17 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
+              
 
-              <time title="创建时间：2021-02-05 20:56:38" itemprop="dateCreated datePublished" datetime="2021-02-05T20:56:38+08:00">2021-02-05</time>
+              <time title="创建时间：2021-09-27 22:49:44 / 修改时间：23:40:55" itemprop="dateCreated datePublished" datetime="2021-09-27T22:49:44+08:00">2021-09-27</time>
             </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-09 19:50:41" itemprop="dateModified" datetime="2021-02-09T19:50:41+08:00">2021-02-09</time>
-              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
               </span>
               <span class="post-meta-item-text">分类于</span>
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/SpringMVC/" itemprop="url" rel="index"><span itemprop="name">SpringMVC</span></a>
+                  <a href="/categories/%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/" itemprop="url" rel="index"><span itemprop="name">交易日志</span></a>
                 </span>
             </span>
 
@@ -222,39 +214,152 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="SpringMVC-03-Forward-and-Redirect"><a href="#SpringMVC-03-Forward-and-Redirect" class="headerlink" title="SpringMVC-03-Forward_and_Redirect"></a>SpringMVC-03-Forward_and_Redirect</h1><p>SpringMVC 对基本的转发与重定向操作有了更好的封装</p>
-<p>通过智能的处理器、适配器、视图解析器，我们可以方便的解析路径地址</p>
-<p>并且，SpringMVC对原生的Servlet功能可以做到完全兼容</p>
+        <h1 id="2021-9-27-交易日志"><a href="#2021-9-27-交易日志" class="headerlink" title="2021.9.27 交易日志"></a>2021.9.27 交易日志</h1><h2 id="指数"><a href="#指数" class="headerlink" title="指数"></a>指数</h2><ol>
+<li><p><strong>上证指数</strong>平量跌破五日线，强势区死叉区间。暂时没有止跌信号，如果明天15、30、60分钟底背离确认才有可能展开反弹，最差情况可能要等回落到零轴附近甚至考验半年线了。</p>
+</li>
+<li><p><strong>上证50</strong>在白酒带领下强势上攻，换手率依旧很低，后续最好情况下可以直接展开一浪，但是一浪我也不会参与。</p>
+</li>
+<li><p><strong>中证500</strong>在资源下跌影响下直接下探季线，暂时没有止跌信号，如果明天15、30、60分钟底背离确认展开反弹可能性大，极端情况下如果急速跌破季线可以考虑低级别背离。</p>
+<p>半导体小幅放量，早盘上攻，在白酒长了之后就回落了，没有跌破五日线，后续等30分钟金叉可能继续反弹，最坏情况跌破半年线，考虑小级别顶背离止损。</p>
+<p>环保指数没了……另一个节能环保指数一阴穿三线，没有止跌信号，也没有一波像样的反弹。短期市场超跌严重，不能轻易操作。</p>
+<p>农业破位</p>
+<p>建发股份，太不活跃了……等</p>
+</li>
+<li><p><strong>中证500</strong>缩量下跌考验月线支撑位，资源股调整需求强烈，<strong>季线偏离很远，一旦破位月线便要考虑及时止损。</strong></p>
+</li>
+</ol>
 <a id="more"></a>
 
-<p><strong>参考</strong></p>
-<p>spring-webmvc官方文档</p>
-<p><a target="_blank" rel="noopener" href="https://docs.spring.io/spring-framework/docs/5.2.12.RELEASE/spring-framework-reference/web.html#spring-web">https://docs.spring.io/spring-framework/docs/5.2.12.RELEASE/spring-framework-reference/web.html#spring-web</a></p>
-<p>狂神说博客</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_33369905/article/details/105828924">https://blog.csdn.net/qq_33369905/article/details/105828924</a></p>
-<p><strong>Github仓库</strong></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/rainingapple/Spring_Learn">https://github.com/rainingapple/Spring_Learn</a></p>
-<h2 id="兼容原始的ServletAPI"><a href="#兼容原始的ServletAPI" class="headerlink" title="兼容原始的ServletAPI"></a>兼容原始的ServletAPI</h2><p>通过设置ServletAPI , 不需要视图解析器 .</p>
-<ul>
-<li>通过 HttpServletResponse 进行<strong>输出</strong></li>
-<li>通过 HttpServletResponse <strong>实现重定向</strong></li>
-</ul>
-<p>​        注意原始的servlet，连发布的具体项目名都无法识别，重定向加上项目的前缀</p>
-<ul>
-<li>通过 HttpServletRequest <strong>实现转发</strong></li>
-</ul>
-<p>​       转发使用的是相对于当前项目的全限定名</p>
-<p>这显然非常容易出错，并且复用性差</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_ServletAPI</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/servlet/test1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test1</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        resp.getWriter().print(<span class="string">&quot;采用resp的writer输出消息&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;servlet/test2&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> IOException </span>&#123;</span><br><span class="line">        resp.sendRedirect(<span class="string">&quot;/SpringMVC_04_Forward_and_Redirect_war_exploded/index.jsp&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;servlet/test3&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test3</span><span class="params">(HttpServletRequest req, HttpServletResponse resp)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        req.getRequestDispatcher(<span class="string">&quot;/index.jsp&quot;</span>).forward(req,resp);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="无视图解析器的MVC"><a href="#无视图解析器的MVC" class="headerlink" title="无视图解析器的MVC"></a>无视图解析器的MVC</h2><p>测试时我们将视图解析器去掉</p>
-<p>每一次我们都需要使用相对于项目的完全限定名，Spring相比于Servlet智能多了</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_MVC_NO_ViewResolver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/MVCNO/test1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;/WEB-INF/jsp/success.jsp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/MVCNO/test2&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;forward:/WEB-INF/jsp/success.jsp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/MVCNO/test3&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test3</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;redirect:/index.jsp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="加入视图解析器的MVC"><a href="#加入视图解析器的MVC" class="headerlink" title="加入视图解析器的MVC"></a>加入视图解析器的MVC</h2><p>默认执行方式为转发，使用重定向直接使用  <strong>redirect：</strong>  即可</p>
-<p>重定向没有像转发一样的视图解析器的路径拼合，重定向使用当前项目下的全限定名</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test_MVC_ViewResolver</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/MVC/test1&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test1</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;success&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping(&quot;/MVC/test2&quot;)</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">test2</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;redirect:/index.jsp&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<h2 id="板块"><a href="#板块" class="headerlink" title="板块"></a>板块</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>半导体</td>
+<td>冲高回落后回升，没有跌破五日线，没有买卖技术形态，跟随大盘或者领先大盘都有可能。<strong>后续应该先阳后二底形成底背离叠加半年线支撑才能反转，本次只做反弹小阳柱。</strong></td>
+</tr>
+<tr>
+<td>环保工程</td>
+<td>同花顺指数消失了，只能参考环保指数了……………………</td>
+</tr>
+<tr>
+<td>环保</td>
+<td>缩量回踩月线，分钟数据暂时缺失，以个股为主吧</td>
+</tr>
+<tr>
+<td>农业</td>
+<td><strong>观望</strong></td>
+</tr>
+<tr>
+<td>军工</td>
+<td>15、30、60分钟底背离可以加入，再次站上60天线可以加仓。</td>
+</tr>
+<tr>
+<td>5G</td>
+<td>15、30、60分钟底背离可以加入，再次站上60天线可以加仓。</td>
+</tr>
+</tbody></table>
+<h2 id="个股"><a href="#个股" class="headerlink" title="个股"></a>个股</h2><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>操作</th>
+<th>分析</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>高能环境</td>
+<td>15分钟底背离减仓</td>
+<td>缩量上冲季线受阻，主力气息明显。最近几天反思这个股逻辑有哪些漏洞，如果说有的话就是从底部算起的拉升太高了，但是横盘时间长我举得未必站得住脚。<strong>如果15分钟底背离视强度减5-7成仓</strong>。</td>
+</tr>
+<tr>
+<td>建发股份</td>
+<td>随大盘</td>
+<td>股性不活跃，概念不持久。<strong>随大盘冲势结束清仓</strong>。</td>
+</tr>
+<tr>
+<td>康强电子</td>
+<td>耐心持有</td>
+<td>缩量下跌，后续可能形成15、30、60分钟底背离。<strong>半导体小反弹趋势不破不走，目标季线</strong>。</td>
+</tr>
+<tr>
+<td>伟明环保</td>
+<td>观望</td>
+<td>没有买点，观望。</td>
+</tr>
+<tr>
+<td>三达膜</td>
+<td>观望</td>
+<td>形态乱，破位，观望。</td>
+</tr>
+<tr>
+<td>荃银高科</td>
+<td>等吃瓜</td>
+<td>观察以往形态，这是一个走势惊人一致的股。等日线底背离（推测一月以后）可能会有一波行情</td>
+</tr>
+</tbody></table>
+<h2 id="持仓情况"><a href="#持仓情况" class="headerlink" title="持仓情况"></a>持仓情况</h2><h3 id="基金"><a href="#基金" class="headerlink" title="基金"></a>基金</h3><p>上证50、沪深300熊市，大趋势没有逆转，配置仓位较低。</p>
+<table>
+<thead>
+<tr>
+<th>名称</th>
+<th>当前持仓</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>兴全合润混合(LOF)</td>
+<td>2080.73份</td>
+<td></td>
+</tr>
+<tr>
+<td>兴全趋势投资混合(LOF)</td>
+<td>298.77份</td>
+<td></td>
+</tr>
+<tr>
+<td>富国天惠成长混合(LOF)C</td>
+<td>176.63份</td>
+<td></td>
+</tr>
+<tr>
+<td>交银施罗德新成长混合</td>
+<td>70.48份</td>
+<td></td>
+</tr>
+<tr>
+<td>易方达亚洲精选股票(QDII)</td>
+<td>973.02份</td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="股票"><a href="#股票" class="headerlink" title="股票"></a>股票</h3><table>
+<thead>
+<tr>
+<th>名称</th>
+<th>当前持仓</th>
+<th>成本价</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>建发股份</td>
+<td>400</td>
+<td>8.793</td>
+</tr>
+<tr>
+<td>高能环境</td>
+<td>600</td>
+<td>19.032</td>
+</tr>
+<tr>
+<td>康强电子</td>
+<td>200</td>
+<td>15.557</td>
+</tr>
+</tbody></table>
 
     </div>
 
@@ -270,7 +375,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://rainingapple.cn/2021/02/05/SpringMVC-03-%E8%BD%AC%E5%8F%91%E4%B8%8E%E9%87%8D%E5%AE%9A%E5%90%91/" title="SpringMVC-03-转发与重定向">http://rainingapple.cn/2021/02/05/SpringMVC-03-转发与重定向/</a>
+    <a href="http://rainingapple.cn/2021/09/27/2021-9-27-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/" title="2021-9-27-交易日志">http://rainingapple.cn/2021/09/27/2021-9-27-交易日志/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -281,9 +386,7 @@
 
       <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/Java/" rel="tag"># Java</a>
-              <a href="/tags/Spring/" rel="tag"># Spring</a>
-              <a href="/tags/SpringMVC/" rel="tag"># SpringMVC</a>
+              <a href="/tags/%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/" rel="tag"># 交易日志</a>
           </div>
 
         
@@ -292,13 +395,10 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/02/05/SpringMVC-02-RestFul%E9%A3%8E%E6%A0%BC/" rel="prev" title="SpringMVC-02-RestFul风格">
-      <i class="fa fa-chevron-left"></i> SpringMVC-02-RestFul风格
+    <a href="/2021/09/26/2021-9-26-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97/" rel="prev" title="2021-9-26-交易日志">
+      <i class="fa fa-chevron-left"></i> 2021-9-26-交易日志
     </a></div>
-      <div class="post-nav-item">
-    <a href="/2021/02/06/SpringMVC-04-Model-and-MessyCode/" rel="next" title="SpringMVC-04-Model_and_MessyCode">
-      SpringMVC-04-Model_and_MessyCode <i class="fa fa-chevron-right"></i>
-    </a></div>
+      <div class="post-nav-item"></div>
     </div>
       </footer>
     
@@ -358,7 +458,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#SpringMVC-03-Forward-and-Redirect"><span class="nav-number">1.</span> <span class="nav-text">SpringMVC-03-Forward_and_Redirect</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%BC%E5%AE%B9%E5%8E%9F%E5%A7%8B%E7%9A%84ServletAPI"><span class="nav-number">1.1.</span> <span class="nav-text">兼容原始的ServletAPI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A0%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8%E7%9A%84MVC"><span class="nav-number">1.2.</span> <span class="nav-text">无视图解析器的MVC</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E5%85%A5%E8%A7%86%E5%9B%BE%E8%A7%A3%E6%9E%90%E5%99%A8%E7%9A%84MVC"><span class="nav-number">1.3.</span> <span class="nav-text">加入视图解析器的MVC</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2021-9-27-%E4%BA%A4%E6%98%93%E6%97%A5%E5%BF%97"><span class="nav-number">1.</span> <span class="nav-text">2021.9.27 交易日志</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%87%E6%95%B0"><span class="nav-number">1.1.</span> <span class="nav-text">指数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%BF%E5%9D%97"><span class="nav-number">1.2.</span> <span class="nav-text">板块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%AA%E8%82%A1"><span class="nav-number">1.3.</span> <span class="nav-text">个股</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%81%E4%BB%93%E6%83%85%E5%86%B5"><span class="nav-number">1.4.</span> <span class="nav-text">持仓情况</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E9%87%91"><span class="nav-number">1.4.1.</span> <span class="nav-text">基金</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%82%A1%E7%A5%A8"><span class="nav-number">1.4.2.</span> <span class="nav-text">股票</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -488,7 +588,7 @@ NexT.utils.loadComments(document.querySelector('#gitalk-container'), () => {
       repo        : 'my_blog_comment',
       owner       : 'rainingapple',
       admin       : ['rainingapple'],
-      id          : '7ba1eaca66d6bed10d35332b142e1624',
+      id          : 'f846dd8eaed00645dd460182da711f23',
         language: 'zh-CN',
       distractionFreeMode: true
     });
