@@ -163,6 +163,255 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/15/SpringMVC-08-Interceptor/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/15/SpringMVC-08-Interceptor/" class="post-title-link" itemprop="url">SpringMVC-08-Interceptor</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-15 12:53:05 / 修改时间：12:53:54" itemprop="dateCreated datePublished" datetime="2021-02-15T12:53:05+08:00">2021-02-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringMVC/" itemprop="url" rel="index"><span itemprop="name">SpringMVC</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SpringMVC-08-Interceptor"><a href="#SpringMVC-08-Interceptor" class="headerlink" title="SpringMVC-08-Interceptor"></a>SpringMVC-08-Interceptor</h1><p>SpringMVC的处理器拦截器类似于Servlet开发中的过滤器Filter,用于对处理器进行预处理和后处理。</p>
+<p><strong>过滤器与拦截器的区别：</strong>拦截器是AOP思想的具体应用。</p>
+<p><strong>过滤器</strong></p>
+<ul>
+<li>servlet规范中的一部分，任何java web工程都可以使用</li>
+<li>在url-pattern中配置了path之后，可以对要访问的资源进行拦截</li>
+</ul>
+<p><strong>拦截器</strong> </p>
+<ul>
+<li>拦截器是SpringMVC框架自己的，只有使用了SpringMVC框架的工程才能使用</li>
+<li>拦截器只会拦截访问的<strong>控制器方法</strong>， 如果访问的是jsp/html/css/image/js是不会进行拦截的</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/15/SpringMVC-08-Interceptor/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/15/SpringMVC-07-Ajax/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/15/SpringMVC-07-Ajax/" class="post-title-link" itemprop="url">SpringMVC-07-Ajax</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-15 10:13:57 / 修改时间：18:43:21" itemprop="dateCreated datePublished" datetime="2021-02-15T10:13:57+08:00">2021-02-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/SpringMVC/" itemprop="url" rel="index"><span itemprop="name">SpringMVC</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="SpringMVC-07-Ajax"><a href="#SpringMVC-07-Ajax" class="headerlink" title="SpringMVC-07-Ajax"></a>SpringMVC-07-Ajax</h1><h2 id="Ajax简介"><a href="#Ajax简介" class="headerlink" title="Ajax简介"></a>Ajax简介</h2><ul>
+<li>Ajax = <strong>Asynchronous JavaScript and XML</strong>（异步的 JavaScript 和 XML）。</li>
+<li>Ajax 是一种在无需重新加载整个网页的情况下，能够更新部分网页的技术。</li>
+<li>Ajax 不是一种新的编程语言，而是一种用于创建更好<strong>更快以及交互性更强的</strong>Web应用程序的技术。</li>
+<li>在 2005 年，Google 通过其 Google Suggest 使 AJAX 变得流行起来。Google Suggest能够自动帮你完成搜索单词。Google Suggest 使用 AJAX 创造出<strong>动态性</strong>极强的 web 界面：当您在谷歌的搜索框输入关键字时，JavaScript 会把这些字符发送到服务器，然后服务器会返回一个搜索建议的列表。</li>
+<li>使用ajax技术的网页，通过在后台服务器进行少量的数据交换，就可以实现异步<strong>局部更新</strong>。</li>
+<li>使用Ajax，用户可以创建接近本地桌面应用的直接、高可用、更丰富、更动态的Web用户界面。</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/15/SpringMVC-07-Ajax/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/09/%E4%BD%BF%E7%94%A8IDEA%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8BTomcat%E9%83%A8%E7%BD%B2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="rainingapple">
+      <meta itemprop="description" content="划水也要划得自在">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="rainingappleMK">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/02/09/%E4%BD%BF%E7%94%A8IDEA%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8BTomcat%E9%83%A8%E7%BD%B2/" class="post-title-link" itemprop="url">使用IDEA进行远程Tomcat部署</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-02-09 19:51:33 / 修改时间：20:23:23" itemprop="dateCreated datePublished" datetime="2021-02-09T19:51:33+08:00">2021-02-09</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Tomcat/" itemprop="url" rel="index"><span itemprop="name">Tomcat</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="使用IDEA进行远程Tomcat部署"><a href="#使用IDEA进行远程Tomcat部署" class="headerlink" title="使用IDEA进行远程Tomcat部署"></a>使用IDEA进行远程Tomcat部署</h1><p>使用IDEA辅助进行Tomcat云端部署</p>
+<h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>阿里云轻型服务器</li>
+<li>IDEA</li>
+<li>Tomcat 9.0.37</li>
+<li>JDK 1.8</li>
+</ul>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/02/09/%E4%BD%BF%E7%94%A8IDEA%E8%BF%9B%E8%A1%8C%E8%BF%9C%E7%A8%8BTomcat%E9%83%A8%E7%BD%B2/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/09/SpringMVC-06-SSM-FrameWork/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -776,300 +1025,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/03/Spring-09-%E6%95%B4%E5%90%88mybatis/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="rainingapple">
-      <meta itemprop="description" content="划水也要划得自在">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="rainingappleMK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/03/Spring-09-%E6%95%B4%E5%90%88mybatis/" class="post-title-link" itemprop="url">Spring-09-整合mybatis</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-02-03 11:38:28 / 修改时间：11:39:01" itemprop="dateCreated datePublished" datetime="2021-02-03T11:38:28+08:00">2021-02-03</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Spring/" itemprop="url" rel="index"><span itemprop="name">Spring</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring-09-整合MyBatis"><a href="#Spring-09-整合MyBatis" class="headerlink" title="Spring-09-整合MyBatis"></a>Spring-09-整合MyBatis</h1><p><strong>什么是 MyBatis-Spring？</strong></p>
-<p>MyBatis-Spring 会帮助你将 MyBatis 代码无缝地整合到 Spring 中。</p>
-<p><strong>知识基础</strong></p>
-<p>在开始使用 MyBatis-Spring 之前，你需要先熟悉 Spring 和 MyBatis 这两个框架和有关它们的术语。这很重要</p>
-<p>MyBatis-Spring 需要以下版本：</p>
-<table>
-<thead>
-<tr>
-<th align="left">MyBatis-Spring</th>
-<th align="left">MyBatis</th>
-<th align="left">Spring 框架</th>
-<th align="left">Spring Batch</th>
-<th align="left">Java</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">2.0</td>
-<td align="left">3.5+</td>
-<td align="left">5.0+</td>
-<td align="left">4.0+</td>
-<td align="left">Java 8+</td>
-</tr>
-<tr>
-<td align="left">1.3</td>
-<td align="left">3.4+</td>
-<td align="left">3.2.2+</td>
-<td align="left">2.1+</td>
-<td align="left">Java 6+</td>
-</tr>
-</tbody></table>
-<ul>
-<li>在基础的 MyBatis 用法中，是通过 SqlSessionFactoryBuilder 来创建 SqlSessionFactory 的。</li>
-</ul>
-<p>​       而在 MyBatis-Spring 中，则使用 SqlSessionFactoryBean 来创建。</p>
-<ul>
-<li><p>在基础的 MyBatis 用法中，是通过 SqlSession来执行映射了的语句，提交或回滚连接</p>
-<p>在 MyBatis 中，你可以使用 SqlSessionFactory 来创建 SqlSession。</p>
-</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/03/Spring-09-%E6%95%B4%E5%90%88mybatis/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/02/Mybatis-03-Configuration-and-lifecycle/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="rainingapple">
-      <meta itemprop="description" content="划水也要划得自在">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="rainingappleMK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/02/Mybatis-03-Configuration-and-lifecycle/" class="post-title-link" itemprop="url">Mybatis-03-Configuration and lifecycle</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-02-02 18:24:23 / 修改时间：18:25:16" itemprop="dateCreated datePublished" datetime="2021-02-02T18:24:23+08:00">2021-02-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mybatis-03-Configuration-and-lifecycle"><a href="#Mybatis-03-Configuration-and-lifecycle" class="headerlink" title="Mybatis-03-Configuration and lifecycle"></a>Mybatis-03-Configuration and lifecycle</h1><h2 id="核心配置文件"><a href="#核心配置文件" class="headerlink" title="核心配置文件"></a>核心配置文件</h2><p>MyBatis 的配置文件包含了会深深影响 MyBatis 行为的设置和属性信息。 配置文档的顶层结构如下：</p>
-<ul>
-<li>configuration（配置）</li>
-<li>properties（属性）</li>
-<li>settings（设置</li>
-<li>typeAliases（类型别名）</li>
-<li>typeHandlers（类型处理器）</li>
-<li>objectFactory（对象工厂）</li>
-<li>plugins（插件）</li>
-<li>environment（环境变量）</li>
-<li>transactionManager（事务管理器）</li>
-<li>dataSource（数据源）</li>
-<li>databaseIdProvider（数据库厂商标识）</li>
-<li>mappers（映射器）</li>
-</ul>
-<!-- 注意元素节点的顺序！顺序不对会报错 -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/02/Mybatis-03-Configuration-and-lifecycle/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/02/02/Mybatis-02-CRUD/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="rainingapple">
-      <meta itemprop="description" content="划水也要划得自在">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="rainingappleMK">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/02/02/Mybatis-02-CRUD/" class="post-title-link" itemprop="url">Mybatis-02-CRUD</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2021-02-02 11:29:15 / 修改时间：13:10:07" itemprop="dateCreated datePublished" datetime="2021-02-02T11:29:15+08:00">2021-02-02</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Mybatis/" itemprop="url" rel="index"><span itemprop="name">Mybatis</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Mybatis-02-CRUD"><a href="#Mybatis-02-CRUD" class="headerlink" title="Mybatis-02-CRUD"></a>Mybatis-02-CRUD</h1><p>In computing, <strong>CRUD</strong> is an acronym for <strong>create</strong>, <strong>Retrieve</strong>, <strong>update</strong>, and <strong>delete</strong>. </p>
-<p>It is used to refer to the basic functions of a database or <strong>persistence layer</strong> in a software system.</p>
-<ul>
-<li><p>C reate new records</p>
-</li>
-<li><p>R etrieve existing records</p>
-</li>
-<li><p>U pdate existing records</p>
-</li>
-<li><p>D elete existing records.</p>
-</li>
-</ul>
-<p>本文介绍使用Mybatis进行基本的CRUD操作</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/02/Mybatis-02-CRUD/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/11/">11</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1135,7 +1094,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">98</span>
+          <span class="site-state-item-count">101</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
