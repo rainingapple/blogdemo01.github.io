@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"rainingapple.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="Spring-05-Autowired在Spring中经常遇见繁杂的属性配置工作，很多value以及ref值需要手动配置。 考虑到我们的类的名称和类型可以共同遵循某些规范，我们就可以依据这些进行自动装配。 由此就引出了 基于名称自动装配ByName 和 基于类型的自动装配ByType 我们可以基于配置文件实现自动装配，或者基于注解实现自动装配 Spring的自动装配需要从两个角度来实现，或者说是两">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring-05-Autowired">
-<meta property="og:url" content="http://rainingapple.cn/2021/01/28/Spring-05-Autowired/index.html">
+<meta property="og:url" content="https://rainingapple.github.io/2021/01/28/Spring-05-Autowired/index.html">
 <meta property="og:site_name" content="rainingappleMK">
 <meta property="og:description" content="Spring-05-Autowired在Spring中经常遇见繁杂的属性配置工作，很多value以及ref值需要手动配置。 考虑到我们的类的名称和类型可以共同遵循某些规范，我们就可以依据这些进行自动装配。 由此就引出了 基于名称自动装配ByName 和 基于类型的自动装配ByType 我们可以基于配置文件实现自动装配，或者基于注解实现自动装配 Spring的自动装配需要从两个角度来实现，或者说是两">
 <meta property="og:locale" content="zh_CN">
@@ -34,7 +34,7 @@
 <meta property="article:tag" content="Spring">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://rainingapple.cn/2021/01/28/Spring-05-Autowired/">
+<link rel="canonical" href="https://rainingapple.github.io/2021/01/28/Spring-05-Autowired/">
 
 
 <script id="page-configurations">
@@ -168,7 +168,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/01/28/Spring-05-Autowired/">
+    <link itemprop="mainEntityOfPage" href="https://rainingapple.github.io/2021/01/28/Spring-05-Autowired/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -307,7 +307,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://rainingapple.cn/2021/01/28/Spring-05-Autowired/" title="Spring-05-Autowired">http://rainingapple.cn/2021/01/28/Spring-05-Autowired/</a>
+    <a href="https://rainingapple.github.io/2021/01/28/Spring-05-Autowired/" title="Spring-05-Autowired">https://rainingapple.github.io/2021/01/28/Spring-05-Autowired/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！

@@ -17,13 +17,13 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"rainingapple.cn","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"rainingapple.github.io","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
   <meta name="description" content="云数据库MySQL初调研概述云数据库 MySQL是一种稳定可靠、可弹性扩展和便于管理的关系型数据库服务。 云数据库 MySQL 提供备份恢复、监控、容灾、快速扩容、数据传输等全套解决方案。 基础实例的优惠价格都在100&#x2F;年左右  实时热备实时双机热备，基于数据备份 + 日志备份（binlog）可支持7日内 - 732日内无损恢复，数据备份、日志备份可以保留7天 - 732天。 自动容灾提供宕机自动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="云数据库MySql">
-<meta property="og:url" content="http://rainingapple.cn/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/index.html">
+<meta property="og:url" content="https://rainingapple.github.io/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/index.html">
 <meta property="og:site_name" content="rainingappleMK">
 <meta property="og:description" content="云数据库MySQL初调研概述云数据库 MySQL是一种稳定可靠、可弹性扩展和便于管理的关系型数据库服务。 云数据库 MySQL 提供备份恢复、监控、容灾、快速扩容、数据传输等全套解决方案。 基础实例的优惠价格都在100&#x2F;年左右  实时热备实时双机热备，基于数据备份 + 日志备份（binlog）可支持7日内 - 732日内无损恢复，数据备份、日志备份可以保留7天 - 732天。 自动容灾提供宕机自动">
 <meta property="og:locale" content="zh_CN">
@@ -40,7 +40,7 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://picgo-mk.oss-cn-beijing.aliyuncs.com/20210126102026.png">
 
-<link rel="canonical" href="http://rainingapple.cn/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/">
+<link rel="canonical" href="https://rainingapple.github.io/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/">
 
 
 <script id="page-configurations">
@@ -174,7 +174,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://rainingapple.cn/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/">
+    <link itemprop="mainEntityOfPage" href="https://rainingapple.github.io/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -266,7 +266,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://rainingapple.cn/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/" title="云数据库MySql">http://rainingapple.cn/2021/01/26/云数据库MySql/</a>
+    <a href="https://rainingapple.github.io/2021/01/26/%E4%BA%91%E6%95%B0%E6%8D%AE%E5%BA%93MySql/" title="云数据库MySql">https://rainingapple.github.io/2021/01/26/云数据库MySql/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
